@@ -9,7 +9,7 @@ devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :role
+  attr_accessible :email, :password, :password_confirmation, :name, :contact_number, :remember_me, :role
   # attr_accessible :title, :body
 end
 # :confirmable

@@ -5,9 +5,9 @@
 #   gem 'sqlite3'
 development:
   adapter: mysql
-  database: VMS_dev
+  database: sample_Db
   username: root
-  password: root
+  password: pwd1234
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
