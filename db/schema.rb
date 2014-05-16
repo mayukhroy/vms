@@ -13,14 +13,6 @@
 
 ActiveRecord::Schema.define(:version => 20140515105956) do
 
-  create_table "books", :force => true do |t|
-    t.integer  "user_id"
-    t.string   "book_name"
-    t.float    "price"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
   create_table "invitations", :force => true do |t|
     t.integer  "vendor_id"
     t.integer  "inviter_id"
@@ -54,6 +46,8 @@ ActiveRecord::Schema.define(:version => 20140515105956) do
     t.string   "email",                  :default => "",     :null => false
     t.string   "encrypted_password",     :default => "",     :null => false
     t.string   "role",                   :default => "USER", :null => false
+    t.string   "name",                   :default => "",     :null => false
+    t.integer  "contact_number",         :default => 0,      :null => false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
