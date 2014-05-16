@@ -9,7 +9,7 @@ gem 'mysql'
 gem 'therubyracer'
 gem 'devise'
 gem 'jquery-rails'
-
+gem 'colorbox-rails'
 
 
 # Gems used only for assets and not required

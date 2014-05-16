@@ -6,7 +6,7 @@
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
-<body>
+<!--<body>
 
 <% if user_signed_in? %>
     You are currently signed in as <%= current_user.email %>.
@@ -16,10 +16,14 @@
   <% end %>
 <p class='notice'><% notice %></p>
 <p class='alert'><% alert %></p>
-<%= yield %>
 
-</body>
-</html>
+-->
+<%= render "layouts/header" %>
+<%=yield %>
+<%= render "layouts/footer" %>
+
+<!--</body>
+</html>-->
 
 
 
