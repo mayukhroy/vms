@@ -1,3 +1,4 @@
+<% if user_signed_in? %>
 <h1>Listing vendors</h1>
 
 <table>
@@ -23,3 +24,4 @@
 <br />
 
 <%= link_to 'New Vendor', new_vendor_path %>
+<% end %>
