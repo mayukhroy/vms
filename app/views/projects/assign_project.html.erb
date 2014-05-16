@@ -1,0 +1,38 @@
+<script language="javascript" type="text/javascript">
+            $(document).ready(function() {
+		alert(22);
+                    $('#search').keyup(function() {
+                            searchTable($(this).val());
+                    });
+            }); 
+</script>
+<h4> Assign services and vendor for <b><%= @project.name %></b></h4><br/>
+
+<input type='text' placeholder='search here . . .' id='search'>
+<table id='searchTable'>
+	<tr>
+		<th>Search</th>
+	</tr>
+	<% @services.each do |service| %>
+		<tr><td><%= service.name %></td></tr>
+	<% end %>
+	<% @vendors.each do |vendor| %>
+		<tr><td><%= vendor.name %></td></tr>
+	<% end %>	
+</table>
+
+
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+
+<% @services.each do |service| %>
+  <%= service.name %><br/>
+<% end %>
+<br/><br/>
+<% @vendors.each do |vendor| %>
+  <%= vendor.name %><br/>
+<% end %>

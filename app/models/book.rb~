@@ -1,0 +1,4 @@
+class Book < ActiveRecord::Base
+  #attr_accessible :book_name, :id, :price
+  belongs_to :user
+end

@@ -1,0 +1,5 @@
+class AddStatusToVendor < ActiveRecord::Migration
+  def change
+    add_column :vendors, :status, :boolean, :default =>true
+  end
+end

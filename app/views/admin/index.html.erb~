@@ -1,0 +1,24 @@
+<h1>Listing users</h1>
+
+<table>
+  <tr>
+    <th>Id</th>
+    <th>Name</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @users.each do |user| %>
+  <tr>
+    <td><%= user.email %></td>
+    <td><%= link_to "Show", controller: "admin", action: "show", id: user %></td>
+    <td><%= link_to "Edit", controller: "admin", action: "edit", id: user %></td>
+    <td><%= link_to "Delete", controller: "admin", action: "destroy",  method: "delete", id: user %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New User', new_admin_path %>
