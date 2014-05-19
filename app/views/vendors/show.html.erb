@@ -10,6 +10,15 @@
   <%= @vendor.email %>
 </p>
 
+<p>
+  <b>Services:</b>
+  <% @services.each do |service| %>
+  <%= service.name %>
+<% end %>
+  
+  </p>
+  
+
 
 <%= link_to 'Edit', edit_vendor_path(@vendor) %> |
 <%= link_to 'Back', vendors_path %>
