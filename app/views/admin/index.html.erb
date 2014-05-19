@@ -1,21 +1,22 @@
 <h1>Listing users</h1>
 
 <table>
+  <tr align='right'><td><%= will_paginate @users %></td></tr>
   <tr>
-    <th>Id</th>
     <th>Name</th>
-    <th></th>
-    <th></th>
-    <th></th>
+    <th>Email</th>
+    <th colspan='3'>Actions</th>
   </tr>
-
+  
 <% @users.each do |user| %>
   <tr>
+    <td><%= user.name %></td>
     <td><%= user.email %></td>
     <td><%= link_to "Show", controller: "admin", action: "show", id: user %></td>
     <td><%= link_to "Edit", controller: "admin", action: "edit", id: user %></td>
     <td><%= link_to "Delete", controller: "admin", action: "destroy",  method: "delete", id: user %></td>
-  </tr><%= will_paginate @users %>
+  </tr>
+  
 <% end %>
 </table>
 
