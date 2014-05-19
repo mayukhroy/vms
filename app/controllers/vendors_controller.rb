@@ -17,6 +17,8 @@ class VendorsController < ApplicationController
   # GET /vendors/1.json
   def show
     @vendor = Vendor.find(params[:id])
+    @services = Service.where(:vendor_id=>@vendor.id)
+    
 
     respond_to do |format|
       format.html # show.html.erb

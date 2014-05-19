@@ -11,9 +11,9 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :vendor_id %><br />
-    <%= f.number_field :vendor_id %>
+  <div >
+    <%= f.label :vendor %><br />
+    <%= f.select :vendor_id, Vendor.all.collect {|p| [p.name, p.id]} %>
   </div>
   <div class="field">
     <%= f.label :name %><br />
