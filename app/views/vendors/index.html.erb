@@ -1,6 +1,7 @@
 <% if user_signed_in? %>
-<h1>Listing vendors</h1>
 
+<h1>Listing vendors</h1>
+<p id="notice"><%= notice %></p>
 <table>
   <tr>
     <th>Name</th>
@@ -15,13 +16,14 @@
     <td><%= vendor.name %></td>
     <td><%= vendor.email %></td>
     <td><%= link_to 'Show', vendor %></td>
-    <td><%= link_to 'Edit', edit_vendor_path(vendor) %></td>
+    <td><%= link_to 'Edit', edit_vendor_path(vendor), :data => { :colorbox => true } %></td>
     <td><%= link_to 'Destroy', vendor, method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
-
+<%= link_to "New Vendor++", new_vendor_path, :data => { :colorbox => true } %>
 <%= link_to 'New Vendor', new_vendor_path %>
 <% end %>
+

@@ -1,4 +1,7 @@
 class VendorsController < ApplicationController
+  layout :false, :only =>[:new, :edit]
+  #layout "false", :only =>[:new]
+  #layout :false =>
   # GET /vendors
   # GET /vendors.json
   def index
@@ -24,12 +27,15 @@ class VendorsController < ApplicationController
   # GET /vendors/new
   # GET /vendors/new.json
   def new
+    
     @vendor = Vendor.new
-
+    #render :layout =>false
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @vendor }
     end
+    #render layout: 'none'
+    #render :layout => "layouts/header"
   end
 
   # GET /vendors/1/edit
@@ -60,7 +66,10 @@ class VendorsController < ApplicationController
 
     respond_to do |format|
       if @vendor.update_attributes(params[:vendor])
-        format.html { redirect_to @vendor, notice: 'Vendor was successfully updated.' }
+        #format.html { redirect_to @vendor, notice: 'Vendor was successfully updated.' }
+	flash[:notice]= 'Vendor was successfully updated.'
+	format.html { redirect_to action: 'index'}
+	#redirect_to({ action: 'index' }, alert: "Something serious happened")
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
