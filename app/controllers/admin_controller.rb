@@ -1,8 +1,8 @@
 class AdminController < ApplicationController
   
   def index
-   # @users = User.find_by_role("USER")
-   @users = User.where(role: 'USER')
+    # @users = User.find_by_role("USER")
+   @users = User.where(role: 'USER').paginate(:page => params[:page], :per_page => 5)
 
     respond_to do |format|
       format.html # index.html.erb
