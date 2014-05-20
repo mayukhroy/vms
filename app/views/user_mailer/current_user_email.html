@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h3>Hi <%= @user.name %>, Project is assigned successfully </h3>
+    <p>
+	<b>Project Name : </b>
+	<br/>
+	<%= @project.name %>	
+    </p>
+    <p>
+	<b>Vendor : </b>
+	<br/>
+	<%= @vendor %>	
+    </p>
+    <p>
+	<b>Service List : </b>
+	<br/>
+	<% @services_ids.each do |service_id| %>
+		<%= Service.find(service_id).name %><br/>
+	<% end %>
+    </p>
+    <p>
+      To login to the site, just follow this link: <%= @url %>.
+    </p>
+  </body>
+</html>
