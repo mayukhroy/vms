@@ -1,7 +1,7 @@
 class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.json
-  #layout "template", except: [:get_service_list]
+  layout false, only: [:get_service_list]
 
   def index
     @projects = Project.all
