@@ -1,0 +1,66 @@
+  <script language="javascript" type="text/javascript">
+	    $(document).ready(function() {
+		    $('#search').keyup(function() {
+			    searchTable($(this).val());
+		    });
+	    }); 
+	    
+	    function searchTable(inputVal) {
+		var table = $('#searchTable');
+		table.find('tr').each(function(index, row) {
+				var allCells = $(row).find('td');
+				if (allCells.length > 0) {
+						var found = false;
+						allCells.each(function(index, td) {
+								var regExp = new RegExp(inputVal, 'i');
+								if (regExp.test($(td).text())) {
+										found = true;
+										return false;
+								}
+						});
+						if (found == true)
+								$(row).show();
+						else
+								$(row).hide();
+				}
+		});
+	}
+	
+	
+	function showServices(vendor_id) {
+		 $.get( "service/"+vendor_id+"/"+<%="#{@project.id}"%>, function( data ) {
+                    $("#"+vendor_id).append(data);
+                });
+	}
+	
+
+ </script>
+
+
+	<h5>Please choose vendor and services for <b><%= @project.name %></b></h5>
+
+<input type='text' placeholder='search here . . .' id='search'> 
+<%= link_to "Show Service List", '#', :onclick => "showServicesList()" %>
+ <table id='searchTable'>
+  <tr>
+    <th>Vendor List</th>
+    <th></th>
+  </tr>
+<% @vendors.each do |vendor| %>
+  <tr>
+    <td><%= link_to vendor.name, '#showService', :onclick => "showServices(#{vendor.id})" %><a name='showService'></a><div id=<%= "#{vendor.id}" %>></div></td>
+    <td></td>
+  </tr>
+<% end %>
+</table>
+<div id='check'></div>
+<a name='check'></a>
+
+<br/>
+<%= link_to 'Back', projects_path %>
+
+
+
+
+
+

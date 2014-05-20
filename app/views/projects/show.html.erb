@@ -1,12 +1,33 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Project Name:</b>
+  <b>Project Name:</b><br/>
   <%= @project.name %>
+</p>
+<p>
+  <b>Vendor Name:</b><br/>
+  <%= @vendor.name %>  
+ </p>
+ <p>
+  <b>Services Available:</b><br/>
+	<% @services_ids.each do |service_id| %>
+		<%= Service.find(service_id).name %><br/>
+	<% end %>
 </p>
 
 
 <%= link_to 'Edit', edit_project_path(@project) %> |
 <%= link_to 'Back', projects_path %>
+<br/>
+<br/>
+<br/>
+
+
+
+	
+	
+
+
+
 
 

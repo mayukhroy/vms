@@ -1,0 +1,16 @@
+<%= form_for(@project) do |f| %>
+	<% for service in @services.find(:all) %>	
+	
+		<% @service_id_assigned = false %>
+		<% if Service.find(service.id).is_assigned? %>
+			<% @service_id_assigned = true %>				
+		<% end %>
+		
+		<%= check_box_tag "project[services_ids][]", service.id , false, disabled: @service_id_assigned %>
+		<%= service.name %>
+		<%= f.hidden_field :vendor_id,  :value => "#{service.vendor_id}" %>
+		<br/>
+	<% end %>
+	<br/>
+	<%= f.submit "Assign"%>
+<% end %>

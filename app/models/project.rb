@@ -3,4 +3,5 @@ class Project < ActiveRecord::Base
   belongs_to :user
   has_many :services
   has_many :vendors, through: :invitations
+  serialize :services_ids
 end
