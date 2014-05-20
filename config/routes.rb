@@ -8,7 +8,9 @@ Library::Application.routes.draw do
   
   resources :projects 
   
-  get '/assign/:id',  to: 'projects#assign_project',  as: 'assign'
+  get '/assign/:id',  to: 'projects#assign',  as: 'assign'
+ 
+  get '/assign/service/:id/:project_id',  to: 'projects#get_service_list'
 
   devise_for :users
   
