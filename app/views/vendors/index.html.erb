@@ -17,10 +17,16 @@
     <td><%= vendor.name %></td>
     <td><%= vendor.email %></td>
     <td><%= link_to 'Show', vendor %></td>
+    <% if current_user.id==vendor.user_id %>
     <td><%= link_to 'Edit', edit_vendor_path(vendor), :data => { :colorbox => true } %></td>
     <td><%= link_to 'Destroy', vendor, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
+     <% else %>
+    <td>Edit</td>
+    <td>Delete</td>
+    <% end  %>
+    <% end  %>
+</tr>
+
 </table>
 
 <br />
