@@ -11,17 +11,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140515105956) do
+ActiveRecord::Schema.define(:version => 20140521025431) do
 
   create_table "invitations", :force => true do |t|
     t.integer  "vendor_id"
-    t.integer  "inviter_id"
+    t.integer  "intiver_id"
     t.integer  "invitee_id"
     t.integer  "project_id"
     t.datetime "invitation_sent_at"
-    t.datetime "created_at",                           :null => false
-    t.datetime "updated_at",                           :null => false
-    t.boolean  "status",             :default => true
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
   end
 
   create_table "projects", :force => true do |t|
@@ -37,9 +36,10 @@ ActiveRecord::Schema.define(:version => 20140515105956) do
   create_table "services", :force => true do |t|
     t.integer  "vendor_id"
     t.string   "name"
-    t.datetime "created_at",                   :null => false
-    t.datetime "updated_at",                   :null => false
-    t.boolean  "status",     :default => true
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
+    t.boolean  "status",      :default => true
+    t.boolean  "is_assigned", :default => false
   end
 
   create_table "users", :force => true do |t|

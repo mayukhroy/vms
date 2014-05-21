@@ -2,14 +2,14 @@
 
 one:
   vendor_id: 1
-  inviter_id: 1
+  intiver_id: 1
   invitee_id: 1
   project_id: 1
-  invitation_sent_at: 2014-05-15 16:26:51
+  invitation_sent_at: 2014-05-20 19:54:31
 
 two:
   vendor_id: 1
-  inviter_id: 1
+  intiver_id: 1
   invitee_id: 1
   project_id: 1
-  invitation_sent_at: 2014-05-15 16:26:51
+  invitation_sent_at: 2014-05-20 19:54:31
