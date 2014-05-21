@@ -9,11 +9,12 @@
 <div id="nav">
 	<ul>
 		<li class="start selected">
+		<% if user_signed_in? %>
 		<!--<li><a href="../">home</a></li>-->
 		<li><a href="/vendors">vendors</a></li>
 		<li><a href="/services">services</a></li>
 		<li><a href="/projects">projects</a></li>
-		<% if user_signed_in? %>
+		
 		<li><%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> </li>
 	        <li><%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %></li>
 	        <% else %>
