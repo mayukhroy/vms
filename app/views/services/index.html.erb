@@ -13,6 +13,7 @@
 <% @services.each do |service| %>
   <tr>
     <td><%= service.vendor_id %></td>
+    <td><%= getServiceVendorName(service.vendor_id) %></td>
     <td><%= service.name %></td>
     <td><%= link_to 'Show', service %></td>
     <td><%= link_to 'Edit', edit_service_path(service) %></td>
