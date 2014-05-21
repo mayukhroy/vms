@@ -1,25 +1,22 @@
 <% if user_signed_in? %>
 
-<h1>Listing vendors</h1>
+<span class="tag-title">Vendors <%= link_to image_tag("/assets/icons/add.png"), new_vendor_path, :data => { :colorbox => true }, class: "link-btn" %></span>
 <p id="notice"><%= notice %></p>
 <table>
-  <tr align='right'><td><%= will_paginate @vendors %></td></tr>
   <tr>
     <th>Name</th>
     <th>Email</th>
-    <th></th>
-    <th></th>
-    <th></th>
+    <th>Action</th>
   </tr>
 
 <% @vendors.each do |vendor| %>
   <tr>
     <td><%= vendor.name %></td>
     <td><%= vendor.email %></td>
-    <td><%= link_to 'Show', vendor %></td>
+    <td><%= link_to image_tag("/assets/icons/view.png"), vendor, :data => { :colorbox => true }, class: "link-btn" %>
     <% if current_user.id==vendor.user_id %>
-    <td><%= link_to 'Edit', edit_vendor_path(vendor), :data => { :colorbox => true } %></td>
-    <td><%= link_to 'Destroy', vendor, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <%= link_to image_tag("/assets/icons/edit.png"), edit_vendor_path(vendor), :data => { :colorbox => true }, class: "link-btn" %>
+    <%= link_to image_tag("/assets/icons/delete.png"), vendor, method: :delete, data: { confirm: 'Are you sure?' }, class: "link-btn" %></td>
      <% else %>
     <td>Edit</td>
     <td>Destroy</td>
@@ -28,9 +25,7 @@
 </tr>
 
 </table>
-
+<tr align='right'><td><%= will_paginate @vendors %></td></tr>
 <br />
-<%= link_to "New Vendor++", new_vendor_path, :data => { :colorbox => true } %>
-<%= link_to 'New Vendor', new_vendor_path %>
 <% end %>
 

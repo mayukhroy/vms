@@ -52,7 +52,9 @@ class VendorsController < ApplicationController
     @vendor.user_id = current_user.id
     respond_to do |format|
       if @vendor.save
-        format.html { redirect_to @vendor, notice: 'Vendor was successfully created.' }
+        #format.html { redirect_to @vendor, notice: 'Vendor was successfully created.' }
+	flash[:notice]= 'Vendor was successfully created.'
+	format.html { redirect_to action: 'index'}
         format.json { render json: @vendor, status: :created, location: @vendor }
       else
         format.html { render action: "new" }

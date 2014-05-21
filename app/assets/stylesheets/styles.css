@@ -430,3 +430,12 @@ li ol, li ul {
 #footer .footer-bottom p, #footer .footer-bottom p a {
 	color: #eee;
 }
+.tag-title{
+	color:#666666;
+	font-weight: bold;
+	font-size: 30px;
+}
+.link-btn img {
+	width: 25px;
+	height: 25px
+}
