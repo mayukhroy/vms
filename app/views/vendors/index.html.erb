@@ -17,9 +17,7 @@
     <% if current_user.id==vendor.user_id %>
     <%= link_to image_tag("/assets/icons/edit.png"), edit_vendor_path(vendor), :data => { :colorbox => true }, class: "link-btn" %>
     <%= link_to image_tag("/assets/icons/delete.png"), vendor, method: :delete, data: { confirm: 'Are you sure?' }, class: "link-btn" %></td>
-     <% else %>
-    <td>Edit</td>
-    <td>Destroy</td>
+    </td>
     <% end  %>
     <% end  %>
 </tr>
