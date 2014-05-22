@@ -12,9 +12,8 @@
 <table id='searchTable'>
   <tr align='right'><td><%= will_paginate @projects %></td></tr>
   <tr>
-    <th><%= link_to "Project Name", :sort=>"name" %></th>
-    <th></th>
-    <th>Action</th>
+    <th align='left'>Project</th>
+    <th colspan='3'>Action</th>
   </tr>
 
 <% @projects.each do |project| %>
@@ -28,13 +27,12 @@
    <% end %>
   <tr>
 	<td><%= project.name %></td>
-	<td><%= link_to_if !@check_vendor, 'Assign Project', assign_path(project) %></td>
-	<td>
+	<td><%= link_to_if !@check_vendor, 'Assign Project', assign_path(project) %>&nbsp;
 		<% if project.vendor_id.present? %>
 			<%= link_to image_tag("/assets/icons/view.png"), project, :data => { :colorbox => true }, class: "link-btn" %>
 		<% end %>   
 		
-		<% if project.user_id == current_user.id %>
+		<% if project.user_id == current_user.id && !@check_vendor%>
 			<%= link_to image_tag("/assets/icons/delete.png"), project, method: :delete, data: { confirm: 'Are you sure?' }, class: "link-btn" %>		
 		<% end %>
 	</td>
