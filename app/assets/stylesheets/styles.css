@@ -216,7 +216,7 @@ li ol, li ul {
 #nav {
 	height: 33px;
 	width: 800px;
-	background-color: #cfcfcf;
+	background-color: #0066CC;
 }
 
 #nav ul {
@@ -233,9 +233,11 @@ li ol, li ul {
 }
 
 #nav ul li a:hover, #nav ul li.selected {
-	background-color:#FF6633;
+	background-color:#0066CC;
 }
-
+.active{
+background-color:black; 
+}
 #nav ul li a {
 	color: #fff;
 	display: block;
