@@ -88,7 +88,9 @@ class ProjectsController < ApplicationController
 		@project = Project.find(params[:id])
 		
 		UserMailer.current_user_email(@current_user, @project).deliver
-		UserMailer.actual_user_email(@actual_user, @project).deliver
+		if @actual_user.id != current_user.id		
+			UserMailer.actual_user_email(@actual_user, @project).deliver
+		end
 		UserMailer.vendor_email(@current_user, @project).deliver
 	end
 	
@@ -102,7 +104,7 @@ class ProjectsController < ApplicationController
   end
   
   def assign
-	  @project = Project.find(params[:id])	
+	  @project = Project.find(params[:id])
 	  @services = Service.all
 	  @vendors = Vendor.all
 	  @check_service = false
