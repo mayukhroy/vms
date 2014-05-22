@@ -3,19 +3,19 @@
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
 
-  <div><%= f.label :email %><br />
+  <div><%= f.label :email %> <font color=red>*</font><br />
   <%= f.email_field :email, autofocus: true %></div>
 	
-  <div><%= f.label :Name %><br />
+  <div><%= f.label :Name %><font color=red>*</font><br />
   <%= f.text_field :name, :autofocus => true %></div>  
 
-  <div><%= f.label :Contact %><br />
+  <div><%= f.label :Contact %> <font color=red>*</font><br />
   <%= f.text_field :contact_number, :autofocus => true,:value =>'' %></div> 
 
-  <div><%= f.label :password %><br />
+  <div><%= f.label :password %> <font color=red>*</font><br />
     <%= f.password_field :password, autocomplete: "off" %></div>
 
-  <div><%= f.label :password_confirmation %><br />
+  <div><%= f.label :password_confirmation %> <font color=red>*</font><br />
     <%= f.password_field :password_confirmation, autocomplete: "off" %></div>
 
   <div><%= f.submit "Sign up" %></div>
