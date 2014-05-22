@@ -8,6 +8,8 @@ Library::Application.routes.draw do
   
   resources :projects 
   
+    get '/password',  to: 'home#password',  as: 'password'
+  
   get '/assign/:id',  to: 'projects#assign',  as: 'assign'
   
    get '/project/status/:change',  to: 'projects#index'
@@ -25,6 +27,7 @@ Library::Application.routes.draw do
   resources :admin do
       member do
         get 'check'
+	put 'update'
       end
   end
   
