@@ -26,12 +26,13 @@ class AdminController < ApplicationController
   end
 
   def edit
-    @user = User.find(params[:id])
+    @user = User.find(current_user.id)
   end
   
 
   # Not yet completed
   def create
+	  
     @user = User.new(params[:user])
 
     respond_to do |format|
@@ -43,7 +44,24 @@ class AdminController < ApplicationController
       end
     end
   end
-
+  
+  
+  def update
+     
+    @user = User.find(current_user.id)
+    respond_to do |format|
+      if @user.update_attributes(params[:user])
+        #format.html { redirect_to @vendor, notice: 'Vendor was successfully updated.' }
+	flash[:notice]= 'User was successfully updated.'
+	format.html { redirect_to action: 'index'}
+	#redirect_to({ action: 'index' }, alert: "Something serious happened")
+        format.json { head :no_content }
+      else
+        format.html { render action: "edit" }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
+      end
+    end
+  end
 
   # Not yet completed
   def destroy
