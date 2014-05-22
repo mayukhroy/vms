@@ -4,7 +4,7 @@ class ProjectsController < ApplicationController
   layout false, only: [:get_service_list, :new, :edit, :show]
 
   def index
-    @projects = Project.paginate(:page => params[:page], :per_page => 5).order(params[:sort])
+    @projects = Project.paginate(:page => params[:page], :per_page => 5).order(params[:sort]).order('name ASC')
     @project = Project.new
 
     respond_to do |format|
