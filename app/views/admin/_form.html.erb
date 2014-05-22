@@ -1,15 +1,10 @@
-<%= form_for @user, url: {action: "create"} do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.text_field :email %>
-  </div>
-  <div class="field">
-    <%= f.hidden_field :password, {:value => '123456789'} %>
-  </div>
-  <div class="field">
-    <%= f.hidden_field :password_confirmation, {:value => '123456789'} %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+<%= form_for @user, url: {action: "update"} do |f| %>
+  
+  <div><%= f.label :Name %><br />
+  <%= f.text_field :name, :autofocus => true ,:value=>current_user.name %></div>  
+
+  <div><%= f.label :Contact %><br />
+  <%= f.text_field :contact_number, :autofocus => true,:value=>current_user.contact_number %></div>
+
+ <div><%= f.submit "Update" %></div>
+ <% end %>
