@@ -4,45 +4,17 @@
 			    searchTable($(this).val());
 		    });
 	    }); 
-	    
-	    function searchTable(inputVal) {
-		var table = $('#searchTable');
-		table.find('tr').each(function(index, row) {
-				var allCells = $(row).find('td');
-				if (allCells.length > 0) {
-						var found = false;
-						allCells.each(function(index, td) {
-								var regExp = new RegExp(inputVal, 'i');
-								if (regExp.test($(td).text())) {
-										found = true;
-										return false;
-								}
-						});
-						if (found == true)
-								$(row).show();
-						else
-								$(row).hide();
-				}
-		});
-	}
-
-	$( document ).ready(function() {		
-		$("#create_project").click(function() {			
-			$("#create_project").hide().after("<%= j render('form') %>")
-		});
-	});	
 </script>
 
-<h1>Projects List</h1>
+<span class="tag-title">Projects <%= link_to image_tag("/assets/icons/add.png"), new_project_path, :data => { :colorbox => true }, class: "link-btn" %></span>
+<p id="notice"><%= notice %></p>
 <input type='text' placeholder='search here . . .' id='search'>
 <table id='searchTable'>
   <tr align='right'><td><%= will_paginate @projects %></td></tr>
   <tr>
-    <th>Project Name</th>
+    <th><%= link_to "Project Name", :sort=>"name" %></th>
     <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
+    <th>Action</th>
   </tr>
 
 <% @projects.each do |project| %>
@@ -55,20 +27,20 @@
 	<% @check_user = true %>
    <% end %>
   <tr>
-    <td><%= project.name %></td>
-    <td><%= link_to_if !@check_vendor, 'Assign Project', assign_path(project) %></td>
-    <td><%= link_to_if @check_vendor, 'Show', project  %></td>
-    <td><%= link_to_if @check_user, 'Edit', edit_project_path(project) %></td>
-    <td><%= link_to_if @check_user, 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+	<td><%= project.name %></td>
+	<td><%= link_to_if !@check_vendor, 'Assign Project', assign_path(project) %></td>
+	<td>
+		<% if project.vendor_id.present? %>
+			<%= link_to image_tag("/assets/icons/view.png"), project, :data => { :colorbox => true }, class: "link-btn" %>
+		<% end %>   
+		
+		<% if project.user_id == current_user.id %>
+			<%= link_to image_tag("/assets/icons/delete.png"), project, method: :delete, data: { confirm: 'Are you sure?' }, class: "link-btn" %>		
+		<% end %>
+	</td>
   </tr>
 <% end %>
 </table>
 <br />
 
-<a href="#" id="create_project">Create New Project</a>
-
 <div id="show_create_project"></div>
-
-
-
-

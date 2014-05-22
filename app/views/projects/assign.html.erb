@@ -4,52 +4,46 @@
 			    searchTable($(this).val());
 		    });
 	    }); 
-	    
-	    function searchTable(inputVal) {
-		var table = $('#searchTable');
-		table.find('tr').each(function(index, row) {
-				var allCells = $(row).find('td');
-				if (allCells.length > 0) {
-						var found = false;
-						allCells.each(function(index, td) {
-								var regExp = new RegExp(inputVal, 'i');
-								if (regExp.test($(td).text())) {
-										found = true;
-										return false;
-								}
-						});
-						if (found == true)
-								$(row).show();
-						else
-								$(row).hide();
-				}
-		});
-	}
-	
-	
+
 	function showServices(vendor_id) {
 		 $.get( "service/"+vendor_id+"/"+<%="#{@project.id}"%>, function( data ) {
                     $("#"+vendor_id).append(data);
                 });
 	}
 	
+	reloadCode();
 
+	function showServicesList() {
+	    window.location.hash = "triggerReloadCode";
+	    window.location.reload();
+	}
+
+	function reloadCode() {
+	    if (window.location.hash.substr(1) == "triggerReloadCode") {
+		window.location.hash = "";
+		<% @vendors.each do |vendor|%>
+			$.get( "service/"+<%= "#{vendor.id}" %>+"/"+<%="#{@project.id}"%>, function( data ) {
+				$("#"+<%= "#{vendor.id}" %>).append(data);
+			});
+		<% end %>
+	    }
+	    $("#serviceList").hide();
+	}
+	
+	
  </script>
-
 
 	<h5>Please choose vendor and services for <b><%= @project.name %></b></h5>
 
 <input type='text' placeholder='search here . . .' id='search'> 
-<%= link_to "Show Service List", '#', :onclick => "showServicesList()" %>
+<%= link_to "Search for Service", '#', :onclick => "showServicesList()" , :id=> "serviceList" %>
  <table id='searchTable'>
   <tr>
     <th>Vendor List</th>
-    <th></th>
   </tr>
 <% @vendors.each do |vendor| %>
   <tr>
     <td><%= link_to vendor.name, '#showService', :onclick => "showServices(#{vendor.id})" %><a name='showService'></a><div id=<%= "#{vendor.id}" %>></div></td>
-    <td></td>
   </tr>
 <% end %>
 </table>

@@ -1,10 +1,10 @@
 class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.json
-  layout false, only: [:get_service_list]
+  layout false, only: [:get_service_list, :new, :edit, :show]
 
   def index
-    @projects = Project.paginate(:page => params[:page], :per_page => 5)
+    @projects = Project.paginate(:page => params[:page], :per_page => 5).order(params[:sort])
     @project = Project.new
 
     respond_to do |format|
@@ -37,9 +37,9 @@ class ProjectsController < ApplicationController
   end
 
   # GET /projects/1/edit
-  def edit
-    @project = Project.find(params[:id])
-  end
+  #def edit
+  #  @project = Project.find(params[:id])
+  #end
 
   # POST /projects
   # POST /projects.json
@@ -88,7 +88,9 @@ class ProjectsController < ApplicationController
 		@project = Project.find(params[:id])
 		
 		UserMailer.current_user_email(@current_user, @project).deliver
-		UserMailer.actual_user_email(@actual_user, @project).deliver
+		if @actual_user.id != current_user.id		
+			UserMailer.actual_user_email(@actual_user, @project).deliver
+		end
 		UserMailer.vendor_email(@current_user, @project).deliver
 	end
 	
@@ -102,7 +104,7 @@ class ProjectsController < ApplicationController
   end
   
   def assign
-	  @project = Project.find(params[:id])	
+	  @project = Project.find(params[:id])
 	  @services = Service.all
 	  @vendors = Vendor.all
 	  @check_service = false
@@ -134,5 +136,6 @@ class ProjectsController < ApplicationController
       format.html { redirect_to projects_url }
       format.json { head :no_content }
     end
-  end  
+  end    
+		  
 end
