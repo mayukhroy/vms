@@ -1,10 +1,10 @@
 class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.json
-  layout false, only: [:get_service_list]
+  layout false, only: [:get_service_list, :new, :edit, :show]
 
   def index
-    @projects = Project.paginate(:page => params[:page], :per_page => 5)
+    @projects = Project.paginate(:page => params[:page], :per_page => 5).order(params[:sort])
     @project = Project.new
 
     respond_to do |format|
@@ -37,9 +37,9 @@ class ProjectsController < ApplicationController
   end
 
   # GET /projects/1/edit
-  def edit
-    @project = Project.find(params[:id])
-  end
+  #def edit
+  #  @project = Project.find(params[:id])
+  #end
 
   # POST /projects
   # POST /projects.json
@@ -134,5 +134,6 @@ class ProjectsController < ApplicationController
       format.html { redirect_to projects_url }
       format.json { head :no_content }
     end
-  end  
+  end    
+		  
 end
