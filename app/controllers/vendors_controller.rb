@@ -52,6 +52,11 @@ class VendorsController < ApplicationController
     @vendor.user_id = current_user.id
     respond_to do |format|
       if @vendor.save
+	#Creating services for this vendor
+	params[:services].values.each do |service|
+		@service = Service.new(:vendor_id => @vendor.id, :name => service)
+		@service.save
+	end
         #format.html { redirect_to @vendor, notice: 'Vendor was successfully created.' }
 	flash[:notice]= 'Vendor was successfully created.'
 	format.html { redirect_to action: 'index'}
