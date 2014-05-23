@@ -3,7 +3,9 @@ class ServicesController < ApplicationController
   # GET /services.json
   def index
     @services = Service.paginate(:page => params[:page], :per_page => 5)
-
+    #@vendors = @services.Vendor.find(:all, :name => 'name')
+    #p "XXXXXXXXXX"
+    #p @services
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @services }

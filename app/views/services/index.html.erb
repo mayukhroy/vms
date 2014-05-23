@@ -9,6 +9,7 @@
   
   <% @vendors.each do |vendor| %>
   <tr>
+<<<<<<< HEAD
     <td><%= vendor.name %></td>
     <td>
 	<% @services.where(:vendor_id => vendor.id).each do |service| %>
@@ -30,5 +31,16 @@
 
 
 
+=======
+    <td><%= service.vendor_id %></td>
+    <td><%= getServiceVendorName(service.vendor_id) %></td>
+    <td><%= service.name %></td>
+    <td><%= link_to 'Show', service %></td>
+    <td><%= link_to 'Edit', edit_service_path(service) %></td>
+    <td><%= link_to 'Destroy', service, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+>>>>>>> 2ad0dcda6c36135033a073f4ce49864097e16024
 
 
