@@ -1,10 +1,18 @@
 class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.json
-  layout false, only: [:get_service_list, :new, :edit, :show]
+  layout false, only: [:get_service_list, :new, :edit, :show, :validate]
 
   def index
-    @projects = Project.paginate(:page => params[:page], :per_page => 5).order(params[:sort]).order('name ASC')
+    if params[:change].present? && params[:change].to_i == 1
+	    @projects = Project.where(:status => true).paginate(:page => params[:page], :per_page => 5).order(params[:sort]).order('name ASC')    
+    elsif params[:change].present? && params[:change].to_i == 0
+	    @projects = Project.where(:status => false).paginate(:page => params[:page], :per_page => 5).order(params[:sort]).order('name ASC')    
+    else		    
+	    @projects = Project.paginate(:page => params[:page], :per_page => 5).order(params[:sort]).order('name ASC')
+    end
+    
+    
     @project = Project.new
 
     respond_to do |format|
@@ -44,6 +52,10 @@ class ProjectsController < ApplicationController
   # POST /projects
   # POST /projects.json
   def create
+	#  if request.xhr?
+	#	  p "dddddddddddddddddddddddddddddddddd"
+	#end
+	  
     @project = Project.new(params[:project])
     @project.user_id = current_user.id
     respond_to do |format|
@@ -137,5 +149,24 @@ class ProjectsController < ApplicationController
       format.json { head :no_content }
     end
   end    
+  
+  def validate
+	  @is_present_project = Project.find_by_name(params[:project_name]).present?
+  end  
+  
+  def change_status
+    @project = Project.find(params[:id])
+    @project.status = params[:change_to]
+    respond_to do |format|
+      if @project.update_attributes(params[:project])	
+        format.html { redirect_to projects_path, notice: 'Project was successfully updated.' }	
+        format.json { head :no_content }
+      else
+        format.html { render action: "edit" }
+        format.json { render json: @project.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+  
 		  
 end

@@ -1,22 +1,37 @@
 <%= form_for(@project) do |f| %>
-  <% if @project.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@project.errors.count, "error") %> prohibited this project from being saved:</h2>
-      <ul>
-      <% @project.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
   <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
+    <%= f.label "Enter Project Name" %><br /><br />
+    <%= f.text_field :name, :id=> "project_name" %>
+    <span id="project_name_error" style="display:none;"></span>
+    <font color="red" size="1"><%= @project.errors[:name].first %></font>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Create Project", :onclick => "return validate_project();" %>
   </div>
 <% end %>
+
+<script>
+	function validate_project(){
+		var check = 0;
+		if($("#project_name").val() == '' || ($("#project_name").val() == null)){
+			$("#project_name_error").show();
+			$("#project_name_error").html("<font color='red' size='1'>Please enter a project name</font>");
+			return false;
+		}
+		if ($("#project_name").val() != ''){
+			$.get( "validate/"+$("#project_name").val(), function( data ) {
+				$("#project_name_error").show();
+				alert('inside');
+				$("#project_name_error").html("<font color='red' size='1'>"+data+"</font>");			
+				check = 1;
+				//alert(99999);
+				//return true;
+			});
+		}
+		return true;
+	}
+	
+</script>
 
 
 

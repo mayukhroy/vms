@@ -15,11 +15,15 @@
 	<% end %>
 </p>
 
+<p>
+  <b>Project Satus:</b><br/>
+  <% if @project.status %>  
+	Active
+  <% else %>
+	Inactive
+  <% end %>
+</p>
 
-<%= link_to 'Edit', edit_project_path(@project) %> |
-<%= link_to 'Back', projects_path %>
-<br/>
-<br/>
 <br/>
 
 
