@@ -5,7 +5,7 @@ class CreateProjects < ActiveRecord::Migration
       t.integer :user_id
       t.string :services_ids
       t.string :name
-      t.boolean :status
+      t.boolean :status, :default => false, :null => false
 
       t.timestamps
     end
