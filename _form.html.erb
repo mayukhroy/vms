@@ -1,0 +1,79 @@
+<%= form_for(@vendor) do |f| %>
+  <!--<% if @vendor.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@vendor.errors.count, "error") %> prohibited this vendor from being saved:</h2>
+
+      <ul>
+      <% @vendor.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>-->
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name, :id => "vendor_name" %>
+	<span id='vendor_name_error' style="display:none;"><font color="red" size="1"> Please enter a name for the vendor</font></span>
+	<font color="red" size="1"><%= @vendor.errors[:name].first %></font>
+  </div>
+  <div class="field">
+    <%= f.label :is_active %><br />
+    <%= f.check_box :is_active %>
+  </div>
+  <div class="field">
+    <%= f.label :address %><br />
+    <%= f.text_area :address,:style=>"width: 300px; height: 80px;"%>
+  </div>
+  <div class="field">
+    <%= f.label :email %><br />
+    <%= f.text_field :email, :id => "vendor_email" %>
+		<span id='vendor_email_error' style="display:none;"><font color="red" size="1"> Please enter a email for the vendor</font></span>
+		<font color="red" size="1"><%= @vendor.errors[:email].first %></font>
+  </div>
+ <div class="field">
+    Select the list of service which you can do for us:<br />
+	<!--<%= f.fields_for :services do |builder| %>
+		<%= render "service_fields", :f => builder %>
+	<% end %>-->
+    <input type="checkbox" name="service[php]">php</checkbox>
+    <input type="checkbox" name="service[C]">C</checkbox>
+    <input type="checkbox" name="service[Cpp]">C++</checkbox>
+    <input type="checkbox" name="service[nodejs]">nodejs</checkbox>
+    <input type="checkbox" name="service[net]">.net</checkbox>
+    <input type="checkbox" name="service[java]">java</checkbox>
+    <input type="checkbox" name="service[jquery]">jQuery</checkbox>
+    <input type="checkbox" name="service[ruby]">ruby</checkbox>
+    <input type="checkbox" name="service[js]">js</checkbox>
+  </div>
+  <div class="actions">
+    <%= f.submit "create vendor", :onclick=> "return validate_vendor();" %>
+  </div>
+<% end %>
+
+<script>
+function validate_vendor()
+{
+	if (($("#vendor_name").val() == '' || $("#vendor_name").val() == null) && ($("#vendor_email").val() == '' || $("#vendor_email").val() == null))
+	{
+		$("#vendor_name_error").show();
+		$("#vendor_email_error").show();
+		return false;
+	}
+	else if ($("#vendor_email").val() == '' || $("#vendor_email").val() == null)
+	{
+		$("#vendor_email_error").show();
+		$("#vendor_name_error").hide();
+		return false;
+	}
+	else if ($("#vendor_name").val() == '' || $("#vendor_name").val() == null)
+	{
+		$("#vendor_name_error").show();
+		$("#vendor_email_error").hide();
+		return false;
+	}
+	return true;
+}
+</script>
+
+
