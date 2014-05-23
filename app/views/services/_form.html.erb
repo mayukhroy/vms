@@ -1,14 +1,11 @@
 <%= form_for(@service) do |f| %>
   <% if @service.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@service.errors.count, "error") %> prohibited this service from being saved:</h2>
-
+    <h3>Errors: </h3>
       <ul>
-      <% @service.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
+      <% @service.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
       <% end %>
       </ul>
-    </div>
   <% end %>
 
   <div >
@@ -17,9 +14,22 @@
   </div>
   <div class="field">
     <%= f.label :name %><br />
-    <%= f.text_field :name %>
+    <%= f.text_field :name , :id => "service_name" %>
+    <span id='service_name_error' style="display:none;"><font color="red" size="1"> <br>Please enter a name for the service</br></font></span>
+	<font color="red" size="1"><%= @service.errors[:name].first %></font>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "create service", :onclick=> "return validate_service();" %>
   </div>
 <% end %>
+<script>
+function validate_service()
+{
+ if ($("#service_name").val() == '' || $("#service_name").val() == null)
+	{
+		$("#service_name_error").show();
+		return false;
+	}
+	return true;
+}
+</script>

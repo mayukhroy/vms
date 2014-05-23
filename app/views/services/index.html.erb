@@ -1,26 +1,34 @@
-<h1>Listing services</h1>
-
+<span class="tag-title">Services <%= link_to image_tag("/assets/icons/add.png"), new_service_path, :data => { :colorbox => true, :colorbox_height =>'400px', :colorbox_width =>'400px'}, class: "link-btn" %></span>
+<p id="notice"><%= notice %></p>
 <table>
-  <tr align='right'><td><%= will_paginate @services %></td></tr>
   <tr>
     <th>Vendor</th>
     <th>Name</th>
-    <th></th>
-    <th></th>
-    <th></th>
+    <th>Action</th>
   </tr>
-
-<% @services.each do |service| %>
+  
+  <% @vendors.each do |vendor| %>
   <tr>
-    <td><%= service.vendor_id %></td>
-    <td><%= service.name %></td>
-    <td><%= link_to 'Show', service %></td>
-    <td><%= link_to 'Edit', edit_service_path(service) %></td>
-    <td><%= link_to 'Destroy', service, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
-</table>
+    <td><%= vendor.name %></td>
+    <td>
+	<% @services.where(:vendor_id => vendor.id).each do |service| %>
+		<%= service.name %><br/>
+	<% end %>
+	</td>
+	<td>
+	<% @services.where(:vendor_id => vendor.id).each do |service| %>
+<% if current_user.id==Vendor.find(service.vendor_id).user_id %>
+	    
+	    <%= link_to image_tag("/assets/icons/delete.png"), service, method: :delete, data: { confirm: 'Are you sure?' }, class: "link-btn" %><br/>
+	<% end %>
+	
+	<% end  %>
+    <% end  %></td>
+</tr>
+  </table>
+<tr align='right'><td><%= will_paginate @services %></td></tr></br>
 
-<br />
 
-<%= link_to 'New Service', new_service_path %>
+
+
+
