@@ -9,8 +9,14 @@ Library::Application.routes.draw do
   resources :projects 
   
   get '/assign/:id',  to: 'projects#assign',  as: 'assign'
+  
+   get '/project/status/:change',  to: 'projects#index'
  
   get '/assign/service/:id/:project_id',  to: 'projects#get_service_list'
+  
+  get '/change/status/:id/:change_to',  to: 'projects#change_status'
+      
+  get '/validate/:project_name',  to: 'projects#validate', as: 'validate'
 
   devise_for :users
   
