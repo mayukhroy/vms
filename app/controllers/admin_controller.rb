@@ -64,7 +64,7 @@ class AdminController < ApplicationController
 
   # Not yet completed
   def destroy
-    @user = User.find(params[:id])
+    @user = User.find(params[:id])    
     @user.destroy
 
     respond_to do |format|
@@ -72,6 +72,12 @@ class AdminController < ApplicationController
     end
   end
   
+  def validate_user
+	@user_email_exist = User.find_by_name(params[:user_email]).present?
+  end
+  
+  
+  private
   def signed_in_user
 	if User.find(current_user.id).role == "USER"
 		redirect_to :controller=>'vendor', :action=>'index'

@@ -19,6 +19,8 @@ Library::Application.routes.draw do
   get '/validate/:project_name',  to: 'projects#validate', as: 'validate'
   
   get '/invitations',  to: 'home#show_invitations', as: 'invitations'
+  
+  get '/user/validate/:user_email',  to: 'admin#validate_user', as: 'validate'
 
   devise_for :users
   

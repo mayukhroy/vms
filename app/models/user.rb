@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
  
 has_many :vendors , :dependent => :destroy
 has_many :projects , :dependent => :destroy
-has_many :invitations , :dependent => :destroy
+has_many :invitations
 devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
 

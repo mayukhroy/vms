@@ -1,4 +1,4 @@
-<span class="tag-title">User List <%= link_to image_tag("/assets/icons/add.png"), new_admin_path, :data => { :colorbox => true }, class: "link-btn" %></span>
+<span class="tag-title">User List <%= link_to image_tag("/assets/icons/add.png"), new_admin_path, :data => { :colorbox => true, :colorbox_height => '380px' , :colorbox_width => '310px' }, class: "link-btn" %></span>
 <p class='notice'><%= notice %></p>
 <table>
   <tr align='right'><td><%= will_paginate @users %></td></tr>

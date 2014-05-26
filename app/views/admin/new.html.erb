@@ -3,15 +3,21 @@
 <%= form_for @user, url: {action: "create"} do |f| %>
   <div class="field">
     <%= f.label :name %><font color=red>*</font><br />
-    <%= f.text_field :name %>
+    <%= f.text_field :name, :id=> "user_name" %>
+    <br/><span id="user_name_error" style="display:none;"></span>
+    <font color="red" size="1"><%= @user.errors[:name].first %></font>
   </div>
   <div class="field">
     <%= f.label :email %><font color=red>*</font><br />
-    <%= f.text_field :email %>
+    <%= f.text_field :email, :id=> "user_email" %>
+    <br/><span id="user_email_error" style="display:none;"></span>
+    <font color="red" size="1"><%= @user.errors[:email].first %></font>
   </div>
   <div class="field">
     <%= f.label :contact_number %><font color=red>*</font><br />
-    <%= f.text_field :contact_number %>
+    <%= f.text_field :contact_number, :id=> "user_contact_number" %>
+    <br/><span id="user_contact_number_error" style="display:none;"></span>
+    <font color="red" size="1"><%= @user.errors[:contact_number].first %></font>
   </div>
   <div class="field">
     <%= f.hidden_field :password, {:value => '123456789'} %>
@@ -20,6 +26,57 @@
     <%= f.hidden_field :password_confirmation, {:value => '123456789'} %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Create User" , :onclick => "return validate_user();" %>
   </div>
 <% end %>
+
+<script>
+	function validate_user(){				
+		var error = 0;
+		$("#user_email_error").html("");
+		$("#user_name_error").html("");
+		$("#user_contact_number_error").html("");
+		$.ajax({url:"ajax/registration_validation.php",
+			type:"POST",
+			async: false,
+			data: {email: $('#email').val(), rollNumber: $('#rollNumber').val()},
+			success:function(data){
+				var passedValidation = false;
+				if($("#user_name").val() == '' || ($("#user_name").val() == null)){
+					$("#user_name_error").show();
+					$("#user_name_error").html("<font color='red' size='1'>Please enter a user name</font>");
+					passedValidation = true;
+					error = 1;
+				}
+				if($("#user_email").val() == '' || ($("#user_email").val() == null)){
+					$("#user_email_error").show();
+					$("#user_email_error").html("<font color='red' size='1'>Please enter an email id</font>");
+					passedValidation = true;
+					error = 1;
+				}
+				if($('#user_contact_number').val().length != 10 ){
+					$("#user_contact_number_error").show();
+					$("#user_contact_number_error").html("<font color='red' size='1'>Please enter a valid contact number</font>");
+					passedValidation = true;
+					error = 1;
+				}
+				if(!$('#user_contact_number').val().match(/^\d+/)){
+					$("#user_contact_number_error").show();
+					$("#user_contact_number_error").html("<font color='red' size='1'>Please enter a valid contact number</font>");
+					passedValidation = true;
+					error = 1;
+				}
+				if($("#user_contact_number").val() == '' || ($("#user_contact_number").val() == null)){
+					$("#user_contact_number_error").show();
+					$("#user_contact_number_error").html("<font color='red' size='1'>Please enter a contact number</font>");
+					passedValidation = true;
+					error = 1;
+				}
+				if (error == 1)
+				{return false;}
+				else
+				{ return true;}
+			}
+		});
+	}
+</script>
