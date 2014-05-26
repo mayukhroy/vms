@@ -18,7 +18,7 @@
 	<td>
 	<% @services.where(:vendor_id => vendor.id).each do |service| %>
 <% if current_user.id==Vendor.find(service.vendor_id).user_id %>
-	    
+	    <%= link_to image_tag("/assets/icons/edit.png"), edit_service_path(service), :data => { :colorbox => true }, class: "link-btn", :data => { :colorbox => true, :colorbox_height =>'400px', :colorbox_width =>'400px'} %>
 	    <%= link_to image_tag("/assets/icons/delete.png"), service, method: :delete, data: { confirm: 'Are you sure?' }, class: "link-btn" %><br/>
 	<% end %>
 	

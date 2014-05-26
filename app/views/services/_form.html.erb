@@ -18,18 +18,17 @@
     <span id='service_name_error' style="display:none;"><font color="red" size="1"> <br>Please enter a name for the service</br></font></span>
 	<font color="red" size="1"><%= @service.errors[:name].first %></font>
   </div>
-  <div class="actions">
-    <%= f.submit "create service", :onclick=> "return validate_service();" %>
+  <div class="actions" >
+    <%= f.submit %>
+
   </div>
 <% end %>
 <script>
-function validate_service()
-{
- if ($("#service_name").val() == '' || $("#service_name").val() == null)
-	{
+$('.actions').on('click',function() {
+	if ($("#service_name").val() == '' || $("#service_name").val() == null) {
 		$("#service_name_error").show();
 		return false;
 	}
-	return true;
-}
+	return true;            
+});
 </script>

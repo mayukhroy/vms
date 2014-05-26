@@ -1,5 +1,5 @@
 class ServicesController < ApplicationController
-	layout :false, :only =>[:new]
+	layout :false, :only =>[:new, :edit]
   # GET /services
   # GET /services.json
   def index
@@ -16,14 +16,14 @@ class ServicesController < ApplicationController
 
   # GET /services/1
   # GET /services/1.json
-  #~ def show
-    #~ @service = Service.find(params[:id])
+  def show
+    @service = Service.find(params[:id])
 
-    #~ respond_to do |format|
-      #~ format.html # show.html.erb
-      #~ format.json { render json: @service }
-    #~ end
-  #~ end
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @service }
+    end
+  end
 
   # GET /services/new
   # GET /services/new.json
@@ -37,9 +37,9 @@ class ServicesController < ApplicationController
   end
 
   # GET /services/1/edit
-  #~ def edit
-    #~ @service = Service.find(params[:id])
-  #~ end
+  def edit
+     @service = Service.find(params[:id])
+  end
 
   # POST /services
   # POST /services.json
@@ -48,7 +48,9 @@ class ServicesController < ApplicationController
 
     respond_to do |format|
       if @service.save
-        format.html { redirect_to services_path, notice: 'Service was successfully created.' }
+        #format.html { redirect_to services_path, notice: 'Service was successfully created.' }
+	flash[:notice]= 'Service was successfully created.'
+	format.html { redirect_to action: 'index'}
         format.json { render json: @service, status: :created, location: @service }
       else
         format.html { render action: "new" }
@@ -64,7 +66,9 @@ class ServicesController < ApplicationController
 
     respond_to do |format|
       if @service.update_attributes(params[:service])
-        format.html { redirect_to @service, notice: 'Service was successfully updated.' }
+        #format.html { redirect_to @service, notice: 'Service was successfully updated.' }
+	flash[:notice]= 'Service was successfully updated.'
+	format.html { redirect_to action: 'index'}
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
