@@ -11,8 +11,8 @@ gem 'devise'
 gem 'jquery-rails'
 gem 'colorbox-rails'
 gem 'will_paginate'
-gem 'heroku'
-gem 'pg'
+#gem 'heroku'
+#gem 'pg'
 
 # Gems used only for assets and not required
 # in production environments by default.
