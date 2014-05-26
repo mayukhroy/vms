@@ -5,6 +5,7 @@
 <table>
   <tr>
     <th>Name</th>
+    <th>Creator</th>
     <th>Email</th>
     <th>Action</th>
   </tr>
@@ -12,6 +13,7 @@
 <% @vendors.each do |vendor| %>
   <tr>
     <td><%= vendor.name %></td>
+    <td><%= getVendorCreatorName(vendor.user_id) %></td>
     <td><%= vendor.email %></td>
     <td><%= link_to image_tag("/assets/icons/view.png"), vendor, :data => { :colorbox => true }, class: "link-btn" %>
     <% if current_user.id==vendor.user_id %>

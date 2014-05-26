@@ -6,7 +6,7 @@ class VendorsController < ApplicationController
   # GET /vendors.json
   def index
     @vendors = Vendor.paginate(:page => params[:page], :per_page => 5).order('name ASC')
-
+p @vendors
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @vendors }
@@ -75,6 +75,11 @@ class VendorsController < ApplicationController
 
     respond_to do |format|
       if @vendor.update_attributes(params[:vendor])
+	#Creating services for this vendor
+	params[:services].values.each do |service|
+		@service = Service.new(:vendor_id => @vendor.id, :name => service)
+		@service.save
+	end
         #format.html { redirect_to @vendor, notice: 'Vendor was successfully updated.' }
 	flash[:notice]= 'Vendor was successfully updated.'
 	format.html { redirect_to action: 'index'}
