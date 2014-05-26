@@ -4,4 +4,5 @@ class Project < ActiveRecord::Base
   has_many :services
   has_many :vendors, through: :invitations
   serialize :services_ids
+  validates :name , :presence => true , :uniqueness => true
 end

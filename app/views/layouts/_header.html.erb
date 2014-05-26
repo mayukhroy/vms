@@ -13,7 +13,7 @@
 		<li><a href="/services" <%if(request.fullpath.include? '/services') %>class="active"<%end%>>services</a></li>
 		<li><a href="/projects" <%if(request.fullpath.include? '/projects') %>class="active"<%end%>>projects</a></li>
 		<li <% if(request.fullpath.include? "/admin/") %>class="active"<% end%>>
-		<a href="/admin/<%=current_user.id%>/edit" >Edit profile</a></li>
+		<a href="/home/<%=current_user.id%>/edit" >Edit profile</a></li>
 		<li <%if(request.fullpath=='/users/edit') %>class="active"<%end%>><%= link_to 'Change password', edit_user_registration_path, :class => 'navbar-link' %> </li>
 	        <li><%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %></li>
 	      	<% else %>
