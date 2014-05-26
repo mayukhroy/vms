@@ -2,15 +2,15 @@
 
 <%= form_for @user, url: {action: "update"} do |f| %>
   <div class="field">
-    <%= f.label :name %><br />
+    <%= f.label :name %><font color=red>*</font><br />
     <%= f.text_field :name %>
   </div>
   <div class="field">
-    <%= f.label :email %><br />
+    <%= f.label :email %><font color=red>*</font><br />
     <%= f.text_field :email %>
   </div>
   <div class="field">
-    <%= f.label :contact_number %><br />
+    <%= f.label :contact_number %><font color=red>*</font><br />
     <%= f.text_field :contact_number %>
   </div>
   <div class="actions">

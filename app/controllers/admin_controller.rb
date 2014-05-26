@@ -1,5 +1,6 @@
 class AdminController < ApplicationController
   #Recent Admin
+  before_filter :signed_in_user
   layout false, only: [:new, :show, :edit]
   
   def index
@@ -39,7 +40,7 @@ class AdminController < ApplicationController
 
     respond_to do |format|
       if @user.save
-	UserMailer.welcome_email(@user).deliver
+	#UserMailer.welcome_email(@user).deliver
         format.html { redirect_to admin_index_path, notice: 'User was successfully created.' }
       else
         format.html { render action: "new" }
@@ -50,7 +51,6 @@ class AdminController < ApplicationController
   
     def update	    
     @user = User.find(params[:id])
-    @user.email = "amitsinha@gmail.com"
     respond_to do |format|
       if @user.update_attributes(params[:user])
 	flash[:notice]= 'User was successfully updated.'
@@ -70,5 +70,11 @@ class AdminController < ApplicationController
     respond_to do |format|
       format.html { redirect_to admin_index_url }
     end
+  end
+  
+  def signed_in_user
+	if User.find(current_user.id).role == "USER"
+		redirect_to :controller=>'vendor', :action=>'index'
+	end			
   end
 end
