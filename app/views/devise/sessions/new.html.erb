@@ -3,12 +3,13 @@
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
   <div><%= f.label :email %><font color=red> *</font><br />
-  <%= f.email_field :email, autofocus: true %>
+  
+  <%= f.email_field :email,  :id => "email_field" ,autofocus: true %>
      <span id='email_error' style="display:none;"><font color="red" size="1"> <br>Please enter email</br></font></span>
   </div>
 
   <div><%= f.label :password %><font color=red> *</font><br />
-    <%= f.password_field :password, autocomplete: "off" %>
+    <%= f.password_field :password, :id => "password_field",autocomplete: "off" %>
    <span id='password_error' style="display:none;"><font color="red" size="1"> <br>Please enter password</br></font></span>  
   </div>
 
@@ -19,31 +20,30 @@
   <div>  <%= f.submit "Sign in", :onclick=> "return validate_service();" %></div>
 <% end %>
 
-<%= render "devise/shared/links" %>
-
 <script>
 function validate_service()
 {
-if (($("#email").val() == '' || $("#email").val() == null) && 
-($("#password").val() == '' || $("#password").val() == null))
-    {
-        $("#email_error").show();
-        $("#password_error").show();
-        return false;
-    }
-    else if ($("#email").val() == '' || $("#email").val() == null)
-    {
-        alert('sasa');
-        $("#password_error").hide();
-        
-        return false;
-    }
-    else if ($("#password").val() == '' || $("#password").val() == null)
-    {
-        $("#email_error").hide();
-        
-        return false;
-    }
-    return true;
+if (($("#email_field").val() == '' || $("#email_field").val() == null) && 
+($("#password_field").val() == '' || $("#password_field").val() == null))
+	{
+		$("#email_error").show();
+		$("#password_error").show();
+		return false;
+	}
+	else if ($("#email_field").val() == '' || $("#email_field").val() == null)
+	{
+		$("#email_error").show();
+		$("#password_error").hide();
+		
+		return false;
+	}
+	else if ($("#password_field").val() == '' || $("#password_field").val() == null)
+	{
+		$("#email_error").hide();
+		$("#password_error").show();
+		return false;
+	}
+	return true;
 }
 </script>
+
