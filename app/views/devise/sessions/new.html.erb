@@ -6,6 +6,7 @@
   
   <%= f.email_field :email,  :id => "email_field" ,autofocus: true %>
      <span id='email_error' style="display:none;"><font color="red" size="1"> <br>Please enter email</br></font></span>
+     <span id='valid_email_error' style="display:none;"><font color="red" size="1"> <br>Please enter valid email</br></font></span>
   </div>
 
   <div><%= f.label :password %><font color=red> *</font><br />
@@ -23,16 +24,31 @@
 <script>
 function validate_service()
 {
-if (($("#email_field").val() == '' || $("#email_field").val() == null) && 
-($("#password_field").val() == '' || $("#password_field").val() == null))
+
+  var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+  if(regex.test($("#email_field").val())==false)
+  {
+		$("#valid_email_error").show();
+		$("#email_error").hide();
+		$("#password_error").show();
+		return false;
+  }
+  
+  else 
+  {
+
+	if (($("#email_field").val() == '' || $("#email_field").val() == null) && 
+	($("#password_field").val() == '' || $("#password_field").val() == null))
 	{
 		$("#email_error").show();
+		$("#valid_email_error").hide();
 		$("#password_error").show();
 		return false;
 	}
 	else if ($("#email_field").val() == '' || $("#email_field").val() == null)
 	{
 		$("#email_error").show();
+		$("#valid_email_error").hide();
 		$("#password_error").hide();
 		
 		return false;
@@ -40,10 +56,11 @@ if (($("#email_field").val() == '' || $("#email_field").val() == null) &&
 	else if ($("#password_field").val() == '' || $("#password_field").val() == null)
 	{
 		$("#email_error").hide();
+		$("#valid_email_error").hide();
 		$("#password_error").show();
 		return false;
 	}
+   }	
 	return true;
 }
 </script>
-
