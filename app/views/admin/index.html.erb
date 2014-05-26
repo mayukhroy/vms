@@ -1,5 +1,5 @@
-<h1>Listing users</h1>
-
+<span class="tag-title">User List <%= link_to image_tag("/assets/icons/add.png"), new_admin_path, :data => { :colorbox => true }, class: "link-btn" %></span>
+<p class='notice'><%= notice %></p>
 <table>
   <tr align='right'><td><%= will_paginate @users %></td></tr>
   <tr>
@@ -12,14 +12,12 @@
   <tr>
     <td><%= user.name %></td>
     <td><%= user.email %></td>
-    <td><%= link_to "Show", controller: "admin", action: "show", id: user %></td>
-    <td><%= link_to "Edit", controller: "admin", action: "edit", id: user %></td>
-    <td><%= link_to "Delete", controller: "admin", action: "destroy",  method: "delete", id: user %></td>
+    <td><%= link_to image_tag("/assets/icons/view.png"), "/admin/#{user.id}", :data => { :colorbox => true, :colorbox_width => '300px' }, class: "link-btn" , :title => "View User Details" %></td>
+    <td><%= link_to image_tag("/assets/icons/edit.png"), "/admin/#{user.id}/edit", :data => { :colorbox => true}, class: "link-btn" , :title => "Edit User Details" %></td>
+    <td><%= link_to image_tag("/assets/icons/delete.png"), "/admin/#{user.id}",  method: "delete", data: { confirm: 'Are you sure?' }, class: "link-btn" , :title => "Delete User" %></td>
   </tr>
   
 <% end %>
 </table>
 
 <br />
-
-<%= link_to 'New User', new_admin_path %>

@@ -1,6 +1,19 @@
 <h1>Editing user</h1>
-<h1>Not yet completed</h1>
-<%= render 'form' %>
 
-
-<%= link_to 'Back', admin_index_path %>
+<%= form_for @user, url: {action: "update"} do |f| %>
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :email %><br />
+    <%= f.text_field :email %>
+  </div>
+  <div class="field">
+    <%= f.label :contact_number %><br />
+    <%= f.text_field :contact_number %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
