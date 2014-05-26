@@ -13,8 +13,8 @@
     <td><%= user.name %></td>
     <td><%= user.email %></td>
     <td><%= link_to image_tag("/assets/icons/view.png"), "/admin/#{user.id}", :data => { :colorbox => true, :colorbox_width => '300px' }, class: "link-btn" , :title => "View User Details" %></td>
-    <td><%= link_to image_tag("/assets/icons/edit.png"), "/admin/#{user.id}/edit", :data => { :colorbox => true}, class: "link-btn" , :title => "Edit User Details" %></td>
-    <td><%= link_to image_tag("/assets/icons/delete.png"), "/admin/#{user.id}",  method: "delete", data: { confirm: 'Are you sure?' }, class: "link-btn" , :title => "Delete User" %></td>
+    <td><%= link_to image_tag("/assets/icons/edit.png"), "/admin/#{user.id}/edit", :data => { :colorbox => true, :colorbox_height => '380px' , :colorbox_width => '310px' }, class: "link-btn" , :title => "Edit User Details" %></td>
+    <td><%= link_to image_tag("/assets/icons/delete.png"), "/admin/#{user.id}",  method: "delete", data: { confirm: 'It will destroy every data related to this user. Are you sure?' }, class: "link-btn" , :title => "Delete User" %></td>
   </tr>
   
 <% end %>

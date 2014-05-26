@@ -20,7 +20,7 @@ Library::Application.routes.draw do
   
   get '/invitations',  to: 'home#show_invitations', as: 'invitations'
   
-  get '/user/validate/:user_email',  to: 'admin#validate_user', as: 'validate'
+  get '/user/validate',  to: 'admin#validate_user'
 
   devise_for :users
   

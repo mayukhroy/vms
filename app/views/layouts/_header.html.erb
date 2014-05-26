@@ -9,6 +9,9 @@
 		<li class="start selected">
 		<% if user_signed_in? %>
 		<!--<li><a href="../">home</a></li>-->
+		<% if User.find(current_user.id).role == "ADMIN" %>
+		<li <%if(request.fullpath.include? '/admin') %>class="active"<%end%>><a href="../">home</a></li>
+		<% end %>
 		<li <%if(request.fullpath.include? '/vendors') %>class="active"<%end%>><a href="/vendors">vendors</a></li>
 		<li><a href="/services" <%if(request.fullpath.include? '/services') %>class="active"<%end%>>services</a></li>
 		<li><a href="/projects" <%if(request.fullpath.include? '/projects') %>class="active"<%end%>>projects</a></li>

@@ -1,7 +1,7 @@
 class AdminController < ApplicationController
   #Recent Admin
   before_filter :signed_in_user
-  layout false, only: [:new, :show, :edit]
+  layout false, only: [:new, :show, :edit, :validate_user]
   
   def index
     # @users = User.find_by_role("USER")
@@ -73,7 +73,7 @@ class AdminController < ApplicationController
   end
   
   def validate_user
-	@user_email_exist = User.find_by_name(params[:user_email]).present?
+	@user_email_exist = User.find_by_email(params[:email_id]).present?
   end
   
   
