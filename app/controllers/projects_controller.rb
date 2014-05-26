@@ -4,12 +4,23 @@ class ProjectsController < ApplicationController
   layout false, only: [:get_service_list, :new, :edit, :show, :validate]
 
   def index
+	  @empty_project = false
     if params[:change].present? && params[:change].to_i == 1
-	    @projects = Project.where(:status => true).paginate(:page => params[:page], :per_page => 5).order(params[:sort]).order('name ASC')    
+	    @projects = Project.where(:status => true).paginate(:page => params[:page], :per_page => 5).order(params[:sort]).order('name ASC')	    
+	    if !@projects.present?
+		    @empty_project = true
+	    end
+	    
     elsif params[:change].present? && params[:change].to_i == 0
-	    @projects = Project.where(:status => false).paginate(:page => params[:page], :per_page => 5).order(params[:sort]).order('name ASC')    
+	    @projects = Project.where(:status => false).paginate(:page => params[:page], :per_page => 5).order(params[:sort]).order('name ASC')
+	    if !@projects.present?
+		    @empty_project = true
+	    end
     else		    
 	    @projects = Project.paginate(:page => params[:page], :per_page => 5).order(params[:sort]).order('name ASC')
+	    if !@projects.present?
+		    @empty_project = true
+	    end
     end
     
     
@@ -90,7 +101,7 @@ class ProjectsController < ApplicationController
 		# saving the invitation data Table name: `invitations`
 		@invitation = Invitations.new()
 		@invitation.vendor_id = @project.vendor_id
-		@invitation.inviter_id = current_user.id
+		@invitation.inviter_id = 1
 		@invitation.invitee_id = @actual_user.id
 		@invitation.project_id = @project.id
 		@invitation.invitation_sent_at = Time.now

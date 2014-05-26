@@ -6,7 +6,14 @@
 	}); 
 </script>
 
+
 <span class="tag-title">Projects <%= link_to image_tag("/assets/icons/add.png"), new_project_path, :data => { :colorbox => true, :colorbox_width => '400px', :colorbox_height => '200px' }, class: "link-btn" %></span>
+<% if @empty_project %>
+	<br/><br/><br/>
+	<%= "Data not available" %>
+	<br/><br/><br/>
+<% else %>
+
 <p class='notice'><%= notice %></p>
 <br/><br/>
 <input type='text' placeholder='search here . . .' id='search'> 
@@ -20,7 +27,7 @@
   <tr>
     <th align='left'>Project</th>
     <th>Status</th>
-    <th>Haha</th>
+    <th>Assign</th>
     <th colspan='3'>Action</th>
   </tr>
 
@@ -63,9 +70,7 @@
 </table>
 <br />
 
-<div id="show_create_project"></div>
-
-
+<% end %>
 
 
 
