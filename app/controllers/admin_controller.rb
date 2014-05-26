@@ -1,4 +1,6 @@
 class AdminController < ApplicationController
+  #Recent Admin
+  layout false, only: [:new, :show, :edit]
   
   def index
     # @users = User.find_by_role("USER")
@@ -26,7 +28,7 @@ class AdminController < ApplicationController
   end
 
   def edit
-    @user = User.find(current_user.id)
+     @user = User.find(params[:id])
   end
   
 
@@ -46,19 +48,16 @@ class AdminController < ApplicationController
   end
   
   
-  def update
-     
-    @user = User.find(current_user.id)
+    def update	    
+    @user = User.find(params[:id])
+    @user.email = "amitsinha@gmail.com"
     respond_to do |format|
       if @user.update_attributes(params[:user])
-        #format.html { redirect_to @vendor, notice: 'Vendor was successfully updated.' }
 	flash[:notice]= 'User was successfully updated.'
 	format.html { redirect_to action: 'index'}
-	#redirect_to({ action: 'index' }, alert: "Something serious happened")
-        format.json { head :no_content }
       else
+	flash[:notice]= 'Please try again'
         format.html { render action: "edit" }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
   end

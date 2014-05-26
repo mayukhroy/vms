@@ -1,0 +1,33 @@
+  <script language="javascript" type="text/javascript">
+	$(document).ready(function() {
+		$('#search').keyup(function() {
+		    searchTable($(this).val());
+		});
+	}); 
+   </script>
+<% @invitations.each do |invitation| %>
+<input type='text' placeholder='search here . . .' id='search'>
+  <table id='searchTable'>
+  <tr>
+	  <th>Project</th>
+	  <th>Vendor</th>
+	  <th>Services</th>
+	  <th>Inviter</th>
+	  <th>Invitee</th>
+	  <th>Sent At</th>
+  <tr>
+  <tr>
+	<td><%= Project.find(invitation.project_id).name %></td>
+	<td><%= Vendor.find(invitation.vendor_id).name %></td>
+	<td>
+		<% Service.where(:vendor_id => invitation.vendor_id).each do |service| %>
+			<%= service.name %><br/>
+		<% end %>
+	
+	</td>
+	<td><%= User.find(invitation.inviter_id).name %></td>
+	<td><%= User.find(invitation.invitee_id).name %></td>
+	<td><%= invitation.invitation_sent_at.strftime('%m/%d/%Y %H:%M') %></td>
+  </tr>
+<% end %>
+</table>
