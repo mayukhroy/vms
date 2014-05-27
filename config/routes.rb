@@ -21,7 +21,7 @@ Library::Application.routes.draw do
   get '/invitations',  to: 'home#show_invitations', as: 'invitations'
   
   get '/user/validate',  to: 'admin#validate_user'
-
+  
   devise_for :users
   
   root :to => 'home#index'

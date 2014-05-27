@@ -14,10 +14,14 @@
   <div class="field">
     <%= f.label :Vendor_Name %><br />
     <%= f.text_field :name %>
+    <span id='vendor_name_error' style="display:none;"><font color="red" size="1">  <br>Please enter a name for the vendor</font></span>
+	<font color="red" size="1"><%= @vendor.errors[:name].first %></font>
   </div>
   <div class="field">
     <%= f.label :Email %><br />
     <%= f.text_field :email %>
+    <span id='vendor_email_error' style="display:none;"><font color="red" size="1">  <br>Please enter a email for the vendor</font></span>
+		<font color="red" size="1"><%= @vendor.errors[:email].first %></font>
   </div>
   <div id='TextBoxesGroup'>
 	<div id="TextBoxDiv1">
@@ -71,4 +75,27 @@ $(document).ready(function(){
      });
  
   });
+$('.actions').on('click',function() {
+	if (($("#vendor_name").val() == '' || $("#vendor_name").val() == null) && ($("#vendor_email").val() == '' || $("#vendor_email").val() == null))
+	{
+		$("#vendor_name_error").show();
+		$("#vendor_email_error").show();
+		return false;
+	}
+	else if ($("#vendor_email").val() == '' || $("#vendor_email").val() == null)
+	{
+		$("#vendor_email_error").show();
+		$("#vendor_name_error").hide();
+		return false;
+	}
+	else if ($("#vendor_name").val() == '' || $("#vendor_name").val() == null)
+	{
+		$("#vendor_name_error").show();
+		$("#vendor_email_error").hide();
+		return false;
+	}
+	return true;  
+});
+
+
 </script>
