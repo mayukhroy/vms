@@ -1,5 +1,6 @@
 class VendorsController < ApplicationController
-  layout :false, :only =>[:new, :edit, :show]
+  layout :false, :only =>[:new, :edit, :validate_email_exists]
+
   #layout "false", :only =>[:new]
   #layout :false =>
   # GET /vendors
@@ -123,7 +124,11 @@ class VendorsController < ApplicationController
       format.json { head :no_content }
     end
   end
-  
+
+  def validate_email_exists
+	@is_present_email = Vendor.find_by_email(params[:email]).present?
+  end
+
   def change_status
     @vendor = Vendor.find(params[:id])
     @vendor.status = params[:change_to]
@@ -135,5 +140,5 @@ class VendorsController < ApplicationController
       end
     end
   end
-  
+
 end
