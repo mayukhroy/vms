@@ -4,6 +4,8 @@ Library::Application.routes.draw do
 
   resources :vendors
   
+  post '/validate_email_exists',  to: 'vendors#validate_email_exists'
+
   resources :projects 
   
   get '/password',  to: 'home#password',  as: 'password'
