@@ -38,7 +38,7 @@
   </tr>
 <% @vendors.each do |vendor| %>
   <tr>
-    <td><%= link_to vendor.name, '#showService', :onclick => "showServices(#{vendor.id})" %><a name='showService'></a><div id=<%= "#{vendor.id}" %>></div></td>
+    <td><%= link_to_if vendor.status, vendor.name, '#showService', :onclick => "showServices(#{vendor.id})" %><a name='showService'></a><div id=<%= "#{vendor.id}" %>></div></td>
   </tr>
 <% end %>
 </table>

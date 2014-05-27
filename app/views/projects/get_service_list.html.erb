@@ -1,23 +1,27 @@
 <br/>
-<% if @services.present? %>
-	<%= form_for(@project) do |f| %>
-		<% for service in @services.find(:all) %>	
-		
-			<% @service_id_assigned = false %>
-			<% if Service.find(service.id).is_assigned? %>
-				<% @service_id_assigned = true %>				
-			<% end %>
+<% if @vendor_active %>
+	<% if @services.present? %>
+		<%= form_for(@project) do |f| %>
+			<% for service in @services.find(:all) %>	
 			
-			<%= check_box_tag "project[services_ids][]", service.id , false, disabled: @service_id_assigned %>
-			<%= service.name %>
-			<%= f.hidden_field :vendor_id,  :value => "#{service.vendor_id}" %>
+				<% @service_id_assigned = false %>
+				<% if Service.find(service.id).is_assigned? %>
+					<% @service_id_assigned = true %>				
+				<% end %>
+				
+				<%= check_box_tag "project[services_ids][]", service.id , false, disabled: @service_id_assigned %>
+				<%= service.name %>
+				<%= f.hidden_field :vendor_id,  :value => "#{service.vendor_id}" %>
+				<br/>
+			<% end %>
 			<br/>
+			<% if !@service_id_assigned %>
+				<%= f.submit "Assign", data: { confirm: 'Are you sure?' }%>
+			<% end %>
 		<% end %>
-		<br/>
-		<% if !@service_id_assigned %>
-			<%= f.submit "Assign", data: { confirm: 'Are you sure?' }%>
-		<% end %>
+	<% else %>
+		Please assign services.
 	<% end %>
 <% else %>
-	Data not available
+	Please activate the vendor.
 <% end %>

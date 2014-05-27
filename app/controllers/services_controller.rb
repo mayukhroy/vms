@@ -1,13 +1,10 @@
 class ServicesController < ApplicationController
-	layout :false, :only =>[:new, :edit]
+	layout :false, :only =>[:new, :edit, :validate_service]
   # GET /services
   # GET /services.json
   def index
-    @services = Service.paginate(:page => params[:page], :per_page => 5)
-    #@vendors = @services.Vendor.find(:all, :name => 'name')
-    #p "XXXXXXXXXX"
-    #p @services
-    @vendors = Vendor.all
+    @services = Service.paginate(:page => params[:page], :per_page => 15).order(params[:sort]).order('name ASC')
+    @vendors = Vendor.order(params[:sort]).order('name ASC')
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @services }
@@ -16,14 +13,14 @@ class ServicesController < ApplicationController
 
   # GET /services/1
   # GET /services/1.json
-  def show
-    @service = Service.find(params[:id])
+  #def show
+    #@service = Service.find(params[:id])
 
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @service }
-    end
-  end
+    #respond_to do |format|
+    #  format.html # show.html.erb
+    #  format.json { render json: @service }
+    #end
+  #end
 
   # GET /services/new
   # GET /services/new.json
@@ -37,9 +34,9 @@ class ServicesController < ApplicationController
   end
 
   # GET /services/1/edit
-  def edit
-     @service = Service.find(params[:id])
-  end
+  #def edit
+  #   @service = Service.find(params[:id])
+  #end
 
   # POST /services
   # POST /services.json
@@ -88,4 +85,9 @@ class ServicesController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  def validate_service
+	  @services = Service.where(:vendor_id => params[:vendor_id])
+	  @service_name_exist = @services.find_by_name(params[:service_name]).present?
+  end  
 end

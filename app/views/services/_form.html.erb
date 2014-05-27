@@ -15,20 +15,10 @@
   <div class="field">
     <%= f.label :name %><br />
     <%= f.text_field :name , :id => "service_name" %>
-    <span id='service_name_error' style="display:none;"><font color="red" size="1"> <br>Please enter a name for the service</br></font></span>
-	<font color="red" size="1"><%= @service.errors[:name].first %></font>
+    <br/><span id="service_name_error" style="display:none;"></span>
+    <font color="red" size="1"><%= @service.errors[:name].first %></font>
   </div>
   <div class="actions" >
-    <%= f.submit %>
-
+    <%= f.submit "Create Service", :onclick => "return validate_service();" %>
   </div>
 <% end %>
-<script>
-$('.actions').on('click',function() {
-	if ($("#service_name").val() == '' || $("#service_name").val() == null) {
-		$("#service_name_error").show();
-		return false;
-	}
-	return true;            
-});
-</script>

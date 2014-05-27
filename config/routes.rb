@@ -26,6 +26,8 @@ Library::Application.routes.draw do
   
   get '/vendor/change/status/:id/:change_to',  to: 'vendors#change_status'
   
+  get '/service/validate',  to: 'services#validate_service'
+  
   devise_for :users
   
   root :to => 'home#index'
