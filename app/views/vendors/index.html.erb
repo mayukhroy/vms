@@ -1,12 +1,30 @@
+<!-- Vendors -->
+
 <% if user_signed_in? %>
 
 <span class="tag-title">Vendors <%= link_to image_tag("/assets/icons/add.png"), new_vendor_path, :data => { :colorbox => true }, class: "link-btn", :data => { :colorbox => true, :colorbox_height =>'600px', :colorbox_width =>'400px'}%></span>
+<% if @empty_vendor %>
+	<br/><br/><br/>
+	<%= "Data not available" %>
+	<br/><br/><br/>
+<% else %>
+
 <p id="notice"><%= notice %></p>
-<table>
+<br/>
+<input type='text' placeholder='search here . . .' id='search'> 
+<% end %>
+
+<%= link_to "Show active only", "/vendor/status/1?s=1" %>
+<%= link_to "Show inactive only", "/vendor/status/0?s=0" %>
+<%= link_to "Show All", "/vendors"%>
+<br/><br/>
+<% if !@empty_vendor %>
+<table id='searchTable'>
   <tr>
     <th>Name</th>
     <th>Creator</th>
     <th>Email</th>
+    <th>Status</th>
     <th>Action</th>
   </tr>
 
@@ -15,8 +33,15 @@
     <td><%= vendor.name %></td>
     <td><%= getVendorCreatorName(vendor.user_id) %></td>
     <td><%= vendor.email %></td>
+    <td>
+	<% if vendor.status %>
+		<%= link_to "Active", "/vendor/change/status/#{vendor.id}/false", data: { confirm: "Click ok, to make #{vendor.name} inactive ?" } %>
+	<% else %>
+		<%= link_to "Inactive", "/vendor/change/status/#{vendor.id}/true", data: { confirm: "Click ok, to make #{vendor.name} active ?" } %>
+	<% end %>
+    </td>
     <td><%= link_to image_tag("/assets/icons/view.png"), vendor, :data => { :colorbox => true }, class: "link-btn" %>
-    <% if current_user.id==vendor.user_id %>
+    <% if current_user.id==vendor.user_id && vendor.status%>
     <%= link_to image_tag("/assets/icons/edit.png"), edit_vendor_path(vendor), :data => { :colorbox => true }, class: "link-btn", :data => { :colorbox => true, :colorbox_height =>'600px', :colorbox_width =>'400px'} %>
     <%= link_to image_tag("/assets/icons/delete.png"), vendor, method: :delete, data: { confirm: 'Are you sure?' }, class: "link-btn" %></td>
     </td>
@@ -25,7 +50,7 @@
 </tr>
 
 </table>
-<tr align='right'><td><%= will_paginate @vendors %></td></tr>
+<div align="right"><%= will_paginate @vendors %></div>
 <br />
 <% end %>
-
+<% end %>

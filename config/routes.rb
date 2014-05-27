@@ -14,13 +14,17 @@ Library::Application.routes.draw do
  
   get '/assign/service/:id/:project_id',  to: 'projects#get_service_list'
   
-  get '/change/status/:id/:change_to',  to: 'projects#change_status'
+  get '/project/change/status/:id/:change_to',  to: 'projects#change_status'
       
   get '/validate/:project_name',  to: 'projects#validate', as: 'validate'
   
   get '/invitations',  to: 'home#show_invitations', as: 'invitations'
   
   get '/user/validate',  to: 'admin#validate_user'
+  
+  get '/vendor/status/:change',  to: 'vendors#index'
+  
+  get '/vendor/change/status/:id/:change_to',  to: 'vendors#change_status'
   
   devise_for :users
   

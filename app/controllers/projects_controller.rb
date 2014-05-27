@@ -4,20 +4,20 @@ class ProjectsController < ApplicationController
   layout false, only: [:get_service_list, :new, :edit, :show, :validate]
 
   def index
-	  @empty_project = false
+    @empty_project = false
     if params[:change].present? && params[:change].to_i == 1
-	    @projects = Project.where(:status => true).paginate(:page => params[:page], :per_page => 5).order(params[:sort]).order('name ASC')	    
+	    @projects = Project.where(:status => true).paginate(:page => params[:page], :per_page => 15).order(params[:sort]).order('name ASC')	    
 	    if !@projects.present?
 		    @empty_project = true
 	    end
 	    
     elsif params[:change].present? && params[:change].to_i == 0
-	    @projects = Project.where(:status => false).paginate(:page => params[:page], :per_page => 5).order(params[:sort]).order('name ASC')
+	    @projects = Project.where(:status => false).paginate(:page => params[:page], :per_page => 15).order(params[:sort]).order('name ASC')
 	    if !@projects.present?
 		    @empty_project = true
 	    end
     else		    
-	    @projects = Project.paginate(:page => params[:page], :per_page => 5).order(params[:sort]).order('name ASC')
+	    @projects = Project.paginate(:page => params[:page], :per_page => 15).order(params[:sort]).order('status DESC')
 	    if !@projects.present?
 		    @empty_project = true
 	    end
@@ -171,10 +171,8 @@ class ProjectsController < ApplicationController
     respond_to do |format|
       if @project.update_attributes(params[:project])	
         format.html { redirect_to projects_path, notice: 'Project was successfully updated.' }	
-        format.json { head :no_content }
       else
-        format.html { render action: "edit" }
-        format.json { render json: @project.errors, status: :unprocessable_entity }
+        format.html { redirect_to projects_path, notice: 'Status not updated. Please try again !' }
       end
     end
   end
