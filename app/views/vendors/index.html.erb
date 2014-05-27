@@ -40,10 +40,14 @@
 		<%= link_to "Inactive", "/vendor/change/status/#{vendor.id}/true", data: { confirm: "Click ok, to make #{vendor.name} active ?" } %>
 	<% end %>
     </td>
-    <td><%= link_to image_tag("/assets/icons/view.png"), vendor, :data => { :colorbox => true }, class: "link-btn" %>
+    <td><%= link_to image_tag("/assets/icons/view.png"), vendor, :data => { :colorbox => true, :colorbox_height =>'300px', :colorbox_width =>'300px'} , class: "link-btn" %>
     <% if current_user.id==vendor.user_id && vendor.status%>
     <%= link_to image_tag("/assets/icons/edit.png"), edit_vendor_path(vendor), :data => { :colorbox => true }, class: "link-btn", :data => { :colorbox => true, :colorbox_height =>'600px', :colorbox_width =>'400px'} %>
+    
+    <% if !Project.where(:vendor_id => vendor.id).present? %>
     <%= link_to image_tag("/assets/icons/delete.png"), vendor, method: :delete, data: { confirm: 'Are you sure?' }, class: "link-btn" %></td>
+    <% end %>
+    
     </td>
     <% end  %>
     <% end  %>

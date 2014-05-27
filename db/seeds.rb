@@ -10,6 +10,7 @@ user_list = [
   [ "Amit Sinha", "amitsinhaee2013@gmail.com", "7308426816", 123456789, 123456789, "ADMIN" ],
 ]
 
+
 user_list.each do |user|
   User.create( :name=>user[0], :email=>user[1], :contact_number=>user[2], :password=>user[3], :password_confirmation =>user[4], :role=>user[5] )
 end

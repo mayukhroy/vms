@@ -1,5 +1,5 @@
 class VendorsController < ApplicationController
-  layout :false, :only =>[:new, :edit, :validate_email_exists]
+  layout :false, :only =>[:new, :edit, :validate_email_exists, :show]
 
   #layout "false", :only =>[:new]
   #layout :false =>

@@ -142,9 +142,14 @@ class ProjectsController < ApplicationController
 	  end
   end
   
-  def get_service_list
-	  @project = Project.find(params[:project_id])
-	  @services = Service.where(vendor_id: params[:id])
+  def get_service_list	 
+	 @vendor_active = true
+	@project = Project.find(params[:project_id])
+	if Vendor.find(params[:id]).status
+		@services = Service.where(vendor_id: params[:id])
+	else
+		@vendor_active = false
+	end	
   end
   
   
