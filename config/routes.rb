@@ -21,6 +21,8 @@ Library::Application.routes.draw do
   get '/invitations',  to: 'home#show_invitations', as: 'invitations'
   
   get '/user/validate',  to: 'admin#validate_user'
+  
+  match "*path", :to => "application#rescue_404"
 
   devise_for :users
   
