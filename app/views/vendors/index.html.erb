@@ -12,13 +12,13 @@
 <p id="notice"><%= notice %></p>
 <br/>
 <input type='text' placeholder='search here . . .' id='search'> 
-<% end %>
+
 
 <%= link_to "Show active only", "/vendor/status/1?s=1" %>
 <%= link_to "Show inactive only", "/vendor/status/0?s=0" %>
 <%= link_to "Show All", "/vendors"%>
 <br/><br/>
-<% if !@empty_vendor %>
+
 <table id='searchTable'>
   <tr>
     <th>Name</th>
