@@ -1,11 +1,29 @@
 class VendorsController < ApplicationController
   layout :false, :only =>[:new, :edit, :validate_email_exists]
+
   #layout "false", :only =>[:new]
   #layout :false =>
   # GET /vendors
   # GET /vendors.json
   def index
-    @vendors = Vendor.paginate(:page => params[:page], :per_page => 5).order('name ASC')
+    @empty_vendor = false
+    if params[:change].present? && params[:change].to_i == 1
+	    @vendors = Vendor.where(:status => true).paginate(:page => params[:page], :per_page => 15).order(params[:sort]).order('name ASC')	    
+	    if !@vendors.present?
+		    @empty_vendor = true
+	    end
+	    
+    elsif params[:change].present? && params[:change].to_i == 0
+	    @vendors = Vendor.where(:status => false).paginate(:page => params[:page], :per_page => 15).order(params[:sort]).order('name ASC')
+	    if !@vendors.present?
+		    @empty_vendor = true
+	    end
+    else		    
+	    @vendors = Vendor.paginate(:page => params[:page], :per_page => 15).order(params[:sort]).order('status DESC')
+	    if !@vendors.present?
+		    @empty_vendor = true
+	    end
+    end
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @vendors }
@@ -110,4 +128,17 @@ class VendorsController < ApplicationController
   def validate_email_exists
 	@is_present_email = Vendor.find_by_email(params[:email]).present?
   end
+
+  def change_status
+    @vendor = Vendor.find(params[:id])
+    @vendor.status = params[:change_to]
+    respond_to do |format|
+      if @vendor.update_attributes(params[:vendor])	
+        format.html { redirect_to vendors_path, notice: 'Vendor was successfully updated.' }	
+      else
+        format.html { redirect_to vendors_path, notice: 'Status not updated. Please try again !' }
+      end
+    end
+  end
+
 end

@@ -19,6 +19,10 @@
 
 -->
 <%= render "layouts/header" %>
+<% if !user_signed_in? %>
+<p class="notice_msg"><%= notice %></p>
+<p class="alert_msg"><%= alert %></p>
+<% end %>
 <%=yield %>
 <%= render "layouts/footer" %>
 

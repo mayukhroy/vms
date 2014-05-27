@@ -1,4 +1,4 @@
-
+<!-- Projects -->
 <span class="tag-title">Projects <%= link_to image_tag("/assets/icons/add.png"), new_project_path, :data => { :colorbox => true, :colorbox_width => '400px', :colorbox_height => '200px' }, class: "link-btn" %></span>
 <% if @empty_project %>
 	<br/><br/><br/>
@@ -7,16 +7,16 @@
 <% else %>
 
 <p class='notice'><%= notice %></p>
-<br/><br/>
+<br/>
 <input type='text' placeholder='search here . . .' id='search'> 
-<% end %>
+
 <%= link_to "Show active only", "/project/status/1?s=1" %>
 <%= link_to "Show inactive only", "/project/status/0?s=0" %>
 <%= link_to "Show All", "/projects"%>
+<br/><br/>
 
-<% if !@empty_project %>
 <table id='searchTable'>
-  <tr align='right'><td><%= will_paginate @projects %></td></tr>
+
   <tr>
     <th align='left'>Project</th>
     <th>Status</th>
@@ -37,9 +37,9 @@
 	<td><%= project.name %></td>
 	<td>
 		<% if project.status %>
-			<%= link_to "Active", "/change/status/#{project.id}/false", data: { confirm: "Click ok, to make #{project.name} inactive ?" } %>
+			<%= link_to "Active", "/project/change/status/#{project.id}/false", data: { confirm: "Click ok, to make #{project.name} inactive ?" } %>
 		<% else %>
-			<%= link_to "Inactive", "/change/status/#{project.id}/true", data: { confirm: "Click ok, to make #{project.name} active ?" } %>
+			<%= link_to "Inactive", "/project/change/status/#{project.id}/true", data: { confirm: "Click ok, to make #{project.name} active ?" } %>
 		<% end %>
 	</td>
 	<td>
@@ -60,9 +60,10 @@
 	</td>
   </tr>
 <% end %>
+
 </table>
 <br />
-
+<div align="right"><%= will_paginate @projects %></div>
 <% end %>
 
 
