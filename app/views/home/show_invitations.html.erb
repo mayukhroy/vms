@@ -5,8 +5,16 @@
 		});
 	}); 
    </script>
+<span class="tag-title">Invitaitons</span>
+<%if !@invitations.present? %>
+	<br/><br/><br/>
+	Data not available
+	<br/><br/><br/>
+<% end %>
 <% @invitations.each do |invitation| %>
+<br/><br/>
 <input type='text' placeholder='search here . . .' id='search'>
+<br/><br/>
   <table id='searchTable'>
   <tr>
 	  <th>Project</th>
@@ -27,7 +35,7 @@
 	</td>
 	<td><%= User.find(invitation.inviter_id).name %></td>
 	<td><%= User.find(invitation.invitee_id).name %></td>
-	<td><%= invitation.invitation_sent_at.strftime('%m/%d/%Y %H:%M') %></td>
+	<td><%= invitation.invitation_sent_at %></td>
   </tr>
 <% end %>
 </table>

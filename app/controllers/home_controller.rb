@@ -12,7 +12,7 @@ class HomeController < ApplicationController
 	end	
 	
 	def show_invitations
-		@invitations = Invitations.all
+		@invitations = Invitation.all
 	end
 	
 	def edit

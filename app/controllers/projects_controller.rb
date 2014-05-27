@@ -99,7 +99,7 @@ class ProjectsController < ApplicationController
 		end
 		
 		# saving the invitation data Table name: `invitations`
-		@invitation = Invitations.new()
+		@invitation = Invitation.new()
 		@invitation.vendor_id = @project.vendor_id
 		@invitation.inviter_id = 1
 		@invitation.invitee_id = @actual_user.id
