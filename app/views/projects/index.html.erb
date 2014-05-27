@@ -37,7 +37,7 @@
 	<td><%= project.name %></td>
 	<td>
 		<% if project.status %>
-			<%= link_to "Active", "/project/change/status/#{project.id}/false", data: { confirm: "Click ok, to make #{project.name} inactive ?" } %>
+			<%= link_to_if  !@check_vendor, "Active", "/project/change/status/#{project.id}/false", data: { confirm: "Click ok, to make #{project.name} inactive ?" } %>
 		<% else %>
 			<%= link_to "Inactive", "/project/change/status/#{project.id}/true", data: { confirm: "Click ok, to make #{project.name} active ?" } %>
 		<% end %>
