@@ -22,8 +22,6 @@ Library::Application.routes.draw do
   
   get '/user/validate',  to: 'admin#validate_user'
   
-  match "*path", :to => "application#rescue_404"
-
   devise_for :users
   
   root :to => 'home#index'
