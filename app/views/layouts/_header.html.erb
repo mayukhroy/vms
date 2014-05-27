@@ -4,8 +4,8 @@
 	<h1><a href="/">VMS</a></h1>
 	<div class="clear"></div>
 </div>
-<div id="nav">
-	<ul> 
+<div id="nav" class='main_menu'>
+	<ul id="menu1"> 
 		<li class="start selected">
 		<% if user_signed_in? %>
 		<!--<li><a href="../">home</a></li>-->
@@ -15,10 +15,16 @@
 		<li <%if(request.fullpath.include? '/vendors') %>class="active"<%end%>><a href="/vendors">vendors</a></li>
 		<li><a href="/services" <%if(request.fullpath.include? '/services') %>class="active"<%end%>>services</a></li>
 		<li><a href="/projects" <%if(request.fullpath.include? '/projects') %>class="active"<%end%>>projects</a></li>
-		<li><a href="/invitations" <%if(request.fullpath.include? '/invitaions') %>class="active"<%end%>>invitations</a></li>
-		<li <% if(request.fullpath.include? "/admin/") %>class="active"<% end%>>
-		<a href="/home/<%=current_user.id%>/edit" >Edit profile</a></li>
-		<li <%if(request.fullpath=='/users/edit') %>class="active"<%end%>><%= link_to 'Change password', edit_user_registration_path, :class => 'navbar-link' %> </li>
+		<li><a href="/invitations" <%if(request.fullpath.include? '/invitations') %>class="active"<%end%>>invitations</a></li>
+	        <li id="sub"><a href="#">Account settings</a>
+		<ul>
+		<li  id='sub' <% if(request.fullpath.include? "/admin/") %>class="active"<% end%>>
+			<a href="/home/<%=current_user.id%>/edit" >Edit profile</a></li>
+		<br><li id='sub' <%if(request.fullpath=='/users/edit') %>class="active"<%end%>><%= link_to 'Change password', edit_user_registration_path, :class => 'navbar-link' %> </li>
+			
+
+		</ul>
+		</li>
 	        <li><%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %></li>
 	      	<% else %>
 		<li><%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %></li>
