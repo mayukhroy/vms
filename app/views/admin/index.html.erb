@@ -1,6 +1,9 @@
 <span class="tag-title">User List <%= link_to image_tag("/assets/icons/add.png"), new_admin_path, :data => { :colorbox => true, :colorbox_height => '380px' , :colorbox_width => '310px' }, class: "link-btn" %></span>
 <p class='notice'><%= notice %></p>
-<table>
+<br/>
+<input type='text' placeholder='search here . . .' id='search'> 
+<br/>
+<table id='searchTable'>
   <tr align='right'><td><%= will_paginate @users %></td></tr>
   <tr>
     <th>Name</th>

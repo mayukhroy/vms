@@ -15,7 +15,8 @@
 //= require colorbox-rails
 //= require_tree .
 
-function searchTable(inputVal) {
+	/* Table Search */
+	function searchTable(inputVal) {
 		var table = $('#searchTable');
 		table.find('tr').each(function(index, row) {
 				var allCells = $(row).find('td');
@@ -35,3 +36,12 @@ function searchTable(inputVal) {
 				}
 		});
 	}
+
+	/* Table search */
+	$(document).ready(function() {
+		$('#search').keyup(function() {
+		    searchTable($(this).val());
+		});
+	}); 
+	
+	/* Project form validation */

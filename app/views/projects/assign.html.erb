@@ -1,9 +1,4 @@
   <script language="javascript" type="text/javascript">
-	    $(document).ready(function() {
-		    $('#search').keyup(function() {
-			    searchTable($(this).val());
-		    });
-	    }); 
 
 	function showServices(vendor_id) {
 		 $.get( "service/"+vendor_id+"/"+<%="#{@project.id}"%>, function( data ) {
