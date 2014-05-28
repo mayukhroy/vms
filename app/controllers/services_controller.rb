@@ -6,6 +6,7 @@ class ServicesController < ApplicationController
   def index
     @services = Service.paginate(:page => params[:page], :per_page => 15).order(params[:sort]).order('name ASC')
     @vendors = Vendor.order(params[:sort]).order('name ASC')
+    @projects  = Project.all
     @empty_service = false
     if !@services.present?
 	    @empty_service = true

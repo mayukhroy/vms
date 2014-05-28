@@ -13,6 +13,7 @@
   <tr>
     <th>Vendor</th>
     <th>Services</th>
+    <th>Projects</th>
     <th>Action</th>
   </tr>
   
@@ -26,18 +27,46 @@
 	</td>
 	<td>
 	<% @services.where(:vendor_id => vendor.id).each do |service| %>
-<% if current_user.id==Vendor.find(service.vendor_id).user_id %>
-		<%= link_to image_tag("/assets/icons/edit.png"), edit_service_path(service), :data => { :colorbox => true }, class: "link-btn", :data => { :colorbox => true, :colorbox_height =>'400px', :colorbox_width =>'400px'} %>
-	    <%= link_to image_tag("/assets/icons/delete.png"), service, method: :delete, data: { confirm: 'Are you sure?' }, class: "link-btn" %><br/>
-	<% end %>
-	
+		<% if Project.where(:vendor_id => vendor.id).present? %>
+			<% Project.where(:vendor_id => vendor.id).each do |project| %>
+				<% project.services_ids.each do |service_id| %>
+					<% if service_id.to_i == service.id.to_i %>
+						<%= link_to project.name, project, :data => { :colorbox => true, :colorbox_width => '300px' }, class: "link-btn" , :title => "View Project Details" %>
+					<% else  %>
+						Not assigned
+					<% end  %>
+					<br/>
+				<% end %>
+			<% end  %>
+		<% else  %>
+			Not assigned
+		<% end  %>
 	<% end  %>
-    <% end  %></td>
+	</td>
+	<td>
+	<% @services.where(:vendor_id => vendor.id).each do |service| %>		
+		<% if current_user.id==Vendor.find(service.vendor_id).user_id %>	
+			<br/>
+			<% Project.where(:vendor_id => vendor.id).each do |project| %>
+				<% project.services_ids.each do |service_id| %>
+					<% if service_id.to_i != service.id.to_i %>
+						<%= link_to image_tag("/assets/icons/edit.png"), edit_service_path(service), :data => { :colorbox => true }, class: "link-btn", :data => { :colorbox => true, :colorbox_height =>'400px', :colorbox_width =>'400px'} %>
+						<%= link_to image_tag("/assets/icons/delete.png"), service, method: :delete, data: { confirm: 'Are you sure?' }, class: "link-btn" %>
+					<% end %>
+				<% end %>
+			<% end  %>
+			<% if !Project.where(:vendor_id => vendor.id).present? %>
+				<%= link_to image_tag("/assets/icons/edit.png"), edit_service_path(service), :data => { :colorbox => true }, class: "link-btn", :data => { :colorbox => true, :colorbox_height =>'400px', :colorbox_width =>'400px'} %>
+				<%= link_to image_tag("/assets/icons/delete.png"), service, method: :delete, data: { confirm: 'Are you sure?' }, class: "link-btn" %>
+			<% end %>
+		<% end %>	
+	<% end  %>
+    <% end  %>
+</td>
 </tr>
   </table>
 <div align="right"><%= will_paginate @services %></div>
 
 <% end  %>
-
 
 
