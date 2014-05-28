@@ -13,8 +13,8 @@
     <%= f.select :vendor_id, Vendor.all.collect {|p| [p.name, p.id]} %>
   </div>
   <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name , :id => "service_name" %>
+    <%= f.label :name %><font color="red"> *</font><br />
+    <%= f.text_field :name , :id => "service_name" %> 
     <br/><span id="service_name_error" style="display:none;"></span>
     <font color="red" size="1"><%= @service.errors[:name].first %></font>
   </div>
