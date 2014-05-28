@@ -15,7 +15,7 @@
 		<li <%if(request.fullpath.include? '/vendors') %>class="active"<%end%>><a href="/vendors">vendors</a></li>
 		<li><a href="/services" <%if(request.fullpath.include? '/services') %>class="active"<%end%>>services</a></li>
 		<li><a href="/projects" <%if(request.fullpath.include? '/projects') %>class="active"<%end%>>projects</a></li>
-		<li><a href="/home/show_invitations" <%if(request.fullpath.include? '/show_invitations') %> class="active"<%end%>>invitations</a></li>
+		<li><a href="/invitations" <%if(request.fullpath.include? '/invitations') %>class="active"<%end%>>invitations</a></li>
 	        <li id="sub" <% if(request.fullpath.include? "/edit") %>class="active"<% end%>><a href="#">Account settings</a>
 		<ul>
 		<li  id='sub'>
