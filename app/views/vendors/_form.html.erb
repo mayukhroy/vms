@@ -12,18 +12,18 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :Vendor_Name %><br />
+    <%= f.label :Vendor_Name %><font color="red"> *</font><br />
     <%= f.text_field :name %>
-    <span id='vendor_name_error' style="display:none;"><font color="red" size="1">  <br>Please enter a name for the vendor</font></span>
+    <span class='error_span' id='vendor_name_error' style="display:none;"><font color="red" size="1">  <br>Please enter a name for the vendor</font></span>
 	<font color="red" size="1"><%= @vendor.errors[:name].first %></font>
   </div>
   <div class="field">
-    <%= f.label :Email %><br />
+    <%= f.label :Email %><font color="red"> *</font><br />
     <%= f.text_field :email %>
-    <span id='vendor_email_error' style="display:none;"><font color="red" size="1">  <br>Please enter a email for the vendor</font></span>
+    <span class='error_span' id='vendor_email_error' style="display:none;"><font color="red" size="1">  <br>Please enter a email for the vendor</font></span>
 		<font color="red" size="1"><%= @vendor.errors[:email].first %></font>
-    <span id='valid_email_error' style="display:none;"><font color="red" size="1"> <br>Please enter valid email</br></font></span>
-    <br/><span id="valid_email_exists_error" style="display:none;"></span>
+    <span class='error_span' id='valid_email_error' style="display:none;"><font color="red" size="1"> <br>Please enter valid email</br></font></span>
+    <br/><span class='error_span' id="valid_email_exists_error" style="display:none;"></span>
   </div>
   <div id='TextBoxesGroup'>
 	<div id="TextBoxDiv1">
@@ -33,12 +33,13 @@
   <input type='button' value='Add Service' id='addButton'>
   <input type='button' value='Remove Service' id='removeButton'>
   <div class="field">
-    <%= f.label :Phone %><br />
+    <%= f.label :Phone %><font color="red"> *</font><br />
     <%= f.text_field :contact_no %>
+    <span class='error_span' id='vendor_contact_no_error' style="display:none;"><font color="red" size="1">  <br>Please enter a Contact Number</font></span>
   </div>
   <div class="field">
     <%= f.label :Address %><br />
-    <%= f.text_field :address %>
+    <%= f.text_area :address, :size => "30x10"  %>
   </div>
   <div class="actions">
   	<% if params[:action]=="new"%>
@@ -83,68 +84,121 @@ $(document).ready(function(){
   });
 
 $('#create_vendor').on('click',function() {
-	if (($("#vendor_name").val() == '' || $("#vendor_name").val() == null) && ($("#vendor_email").val() == '' || $("#vendor_email").val() == null))
-	{
+	$(".error_span").hide();
+	if (($("#vendor_name").val() == '' || $("#vendor_name").val() == null) && ($("#vendor_email").val() == '' || $("#vendor_email").val() == null) && ($("#vendor_contact_no").val() == '' || $("#vendor_contact_no").val() == null))
+	{	
 		$("#vendor_name_error").show();
 		$("#vendor_email_error").show();
-		$("#valid_email_exists_error").hide();
+		$("#vendor_contact_no_error").show();
+		
+		//$("#valid_email_exists_error").hide();
 		return false;
 	}
+	if (($("#vendor_name").val() == '' || $("#vendor_name").val() == null) && ($("#vendor_email").val() == '' || $("#vendor_email").val() == null))
+	{	
+		$("#vendor_name_error").show();
+		$("#vendor_email_error").show();
+		
+		return false;
+	}
+	if (($("#vendor_name").val() == '' || $("#vendor_name").val() == null) && ($("#vendor_contact_no").val() == '' || $("#vendor_contact_no").val() == null))
+	{	
+		$("#vendor_name_error").show();
+		$("#vendor_contact_no_error").show();
+		
+		return false;
+	}
+	
+	if (($("#vendor_email").val() == '' || $("#vendor_email").val() == null) && ($("#vendor_contact_no").val() == '' || $("#vendor_contact_no").val() == null))
+	{	
+		$("#vendor_email_error").show();
+		$("#vendor_contact_no_error").show();
+		
+		return false;
+	}
+	
 	else if ($("#vendor_email").val() == '' || $("#vendor_email").val() == null)
 	{
 		$("#vendor_email_error").show();
-		$("#vendor_name_error").hide();
-		$("#valid_email_exists_error").hide();
 		return false;
 	}
 	else if ($("#vendor_name").val() == '' || $("#vendor_name").val() == null)
 	{
 		$("#vendor_name_error").show();
-		$("#vendor_email_error").hide();
+		return false;
+	}
+	else if ($("#vendor_contact_no").val() == '' || $("#vendor_contact_no").val() == null)
+	{
+		$("#vendor_contact_no_error").show();
 		return false;
 	}
 	else if (false == validate_email($("#vendor_email").val()))
 	{
 		$("#valid_email_error").show();
-		$("#vendor_email_error").hide();
 		return false;
 	}
 	else if (validate_email_exists($("#vendor_email").val()))
 	{	
-		$("#vendor_email_error").hide();		
 		$("#valid_email_exists_error").show();
 		$("#valid_email_exists_error").html("<font color='red' size='1'>"+validate_email_exists($("#vendor_email").val())+"</font>");
 		return false;
 	}
-
+    
 	return true;  
 });
 
 $('#update_vendor').on('click',function() {
-	if (($("#vendor_name").val() == '' || $("#vendor_name").val() == null) && ($("#vendor_email").val() == '' || $("#vendor_email").val() == null))
-	{
+	$(".error_span").hide();
+	if (($("#vendor_name").val() == '' || $("#vendor_name").val() == null) && ($("#vendor_email").val() == '' || $("#vendor_email").val() == null) && ($("#vendor_contact_no").val() == '' || $("#vendor_contact_no").val() == null))
+	{	
 		$("#vendor_name_error").show();
 		$("#vendor_email_error").show();
-		$("#valid_email_exists_error").hide();
+		$("#vendor_contact_no_error").show();
+		
+		//$("#valid_email_exists_error").hide();
 		return false;
 	}
+	if (($("#vendor_name").val() == '' || $("#vendor_name").val() == null) && ($("#vendor_email").val() == '' || $("#vendor_email").val() == null))
+	{	
+		$("#vendor_name_error").show();
+		$("#vendor_email_error").show();
+		
+		return false;
+	}
+	if (($("#vendor_name").val() == '' || $("#vendor_name").val() == null) && ($("#vendor_contact_no").val() == '' || $("#vendor_contact_no").val() == null))
+	{	
+		$("#vendor_name_error").show();
+		$("#vendor_contact_no_error").show();
+		
+		return false;
+	}
+	
+	if (($("#vendor_email").val() == '' || $("#vendor_email").val() == null) && ($("#vendor_contact_no").val() == '' || $("#vendor_contact_no").val() == null))
+	{	
+		$("#vendor_email_error").show();
+		$("#vendor_contact_no_error").show();
+		
+		return false;
+	}
+	
 	else if ($("#vendor_email").val() == '' || $("#vendor_email").val() == null)
 	{
 		$("#vendor_email_error").show();
-		$("#vendor_name_error").hide();
-		$("#valid_email_exists_error").hide();
 		return false;
 	}
 	else if ($("#vendor_name").val() == '' || $("#vendor_name").val() == null)
 	{
 		$("#vendor_name_error").show();
-		$("#vendor_email_error").hide();
+		return false;
+	}
+	else if ($("#vendor_contact_no").val() == '' || $("#vendor_contact_no").val() == null)
+	{
+		$("#vendor_contact_no_error").show();
 		return false;
 	}
 	else if (false == validate_email($("#vendor_email").val()))
 	{
 		$("#valid_email_error").show();
-		$("#vendor_email_error").hide();
 		return false;
 	}
 	/*else if (validate_email_exists($("#vendor_email").val()))
