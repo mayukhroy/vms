@@ -1,6 +1,6 @@
 <%= form_for(@project) do |f| %>
   <div class="field">
-    <%= f.label "Enter Project Name" %><br /><br />
+    <%= f.label "Enter Project Name" %><font color=red>*</font><br /><br />
     <%= f.text_field :name, :id=> "project_name" %>
     <br/><span id="project_name_error" style="display:none;"></span>
     <font color="red" size="1"><%= @project.errors[:name].first %></font>
