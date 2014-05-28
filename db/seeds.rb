@@ -7,7 +7,7 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 user_list = [
-  [ "Amit Sinha", "amitsinhaee2013@gmail.com", "7308426816", "VMS_USER", "VMS_USER", "ADMIN" ],
+  [ "Amit Sinha", "amitsinhaee2013@gmail.com", "7308426816", "VMS_ADMIN", "VMS_ADMIN", "ADMIN" ],
 ]
 
 

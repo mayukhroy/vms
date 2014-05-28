@@ -2,6 +2,10 @@
 
 <p>You can confirm your account email through the link below:</p>
 
-<p>Password: VMS_USER</p>
+<% if User.find_by_email(@email).role == "USER" %>
+	<p>Password: VMS_USER</p>
+<% else %>
+	<p>Password: VMS_ADMIN</p>
+<% end %>
 
 <p><%= link_to 'Confirm my account', confirmation_url(@resource, confirmation_token: @token) %></p>
