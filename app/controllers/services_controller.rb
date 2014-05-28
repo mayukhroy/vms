@@ -3,14 +3,6 @@ class ServicesController < ApplicationController
 
   before_filter :signed_in_user
   
-  private
-  def signed_in_user
-     if !user_signed_in?
-		redirect_to :controller=>'devise/sessions', :action=>'new'
-	end				
-  end
-
-
   def index
     @services = Service.paginate(:page => params[:page], :per_page => 15).order(params[:sort]).order('name ASC')
     @vendors = Vendor.order(params[:sort]).order('name ASC')
@@ -98,5 +90,13 @@ class ServicesController < ApplicationController
   def validate_service
 	  @services = Service.where(:vendor_id => params[:vendor_id])
 	  @service_name_exist = @services.find_by_name(params[:service_name]).present?
-  end  
+  end 
+
+  private
+  def signed_in_user
+     if !user_signed_in?
+    redirect_to :controller=>'devise/sessions', :action=>'new'
+  end       
+  end
+   
 end

@@ -2,12 +2,7 @@ class VendorsController < ApplicationController
   layout :false, :only =>[:new, :edit, :validate_email_exists, :show]
   
   before_filter :signed_in_user
-  
-  private
-  def signed_in_user
-     if !user_signed_in?
-		redirect_to :controller=>'devise/sessions', :action=>'new'	
-	end				
+  			
   end
   def index
     @empty_vendor = false
@@ -144,5 +139,11 @@ class VendorsController < ApplicationController
       end
     end
   end
+
+  private
+  def signed_in_user
+     if !user_signed_in?
+    redirect_to :controller=>'devise/sessions', :action=>'new'  
+  end 
 
 end

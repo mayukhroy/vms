@@ -4,13 +4,6 @@ class ProjectsController < ApplicationController
   layout false, only: [:get_service_list, :new, :edit, :show, :validate]
 
   before_filter :signed_in_user
-  
-  private
-  def signed_in_user
-     if !user_signed_in?
-		redirect_to :controller=>'devise/sessions', :action=>'new'	
-	end				
-  end
 
   def index
     @empty_project = false
@@ -191,5 +184,11 @@ class ProjectsController < ApplicationController
     end
   end
   
-		  
+  private
+  def signed_in_user
+     if !user_signed_in?
+      redirect_to :controller=>'devise/sessions', :action=>'new'  
+     end        
+  end
+  	  
 end
