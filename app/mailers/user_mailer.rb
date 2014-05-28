@@ -2,7 +2,7 @@ class UserMailer < ActionMailer::Base
   default from: "amitsinha559.com"
   def welcome_email(user)
     @user = user
-    @url  = 'vms-poc.herokuapp.com'
+    @url  = 'http://www.vms-poc.herokuapp.com'
     mail(to: @user.email, subject: 'Welcome to My Awesome Site')
   end
   
@@ -13,7 +13,7 @@ class UserMailer < ActionMailer::Base
     
 	@services_ids = @project.services_ids
     
-	@url  = 'vms-poc.herokuapp.com'
+	@url  = 'http://vms-poc.herokuapp.com'
 	mail(to: @user.email, subject: 'Current User')
   end
   
@@ -24,7 +24,7 @@ class UserMailer < ActionMailer::Base
     
 	@services_ids = @project.services_ids
     
-	@url  = 'vms-poc.herokuapp.com'
+	@url  = 'http://vms-poc.herokuapp.com'
 	mail(to: @user.email, subject: 'Actual User')
   end
 
@@ -35,7 +35,7 @@ class UserMailer < ActionMailer::Base
     
 	@services_ids = @project.services_ids
     
-	@url  = 'vms-poc.herokuapp.com'
+	@url  = 'http://vms-poc.herokuapp.com'
 	mail(to: @user.email, subject: 'Vendor')
 end
 
