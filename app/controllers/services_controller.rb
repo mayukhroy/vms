@@ -18,14 +18,14 @@ class ServicesController < ApplicationController
 
   # GET /services/1
   # GET /services/1.json
-  #def show
-    #@service = Service.find(params[:id])
-
-    #respond_to do |format|
-    #  format.html # show.html.erb
-    #  format.json { render json: @service }
-    #end
-  #end
+  def show
+      @service = Service.find(params[:id])
+  
+      respond_to do |format|
+        format.html # show.html.erb
+        format.json { render json: @service }
+      end
+    end
 
   # GET /services/new
   # GET /services/new.json
@@ -39,9 +39,9 @@ class ServicesController < ApplicationController
   end
 
   # GET /services/1/edit
-  #def edit
-  #   @service = Service.find(params[:id])
-  #end
+  def edit
+     @service = Service.find(params[:id])
+  end
 
   # POST /services
   # POST /services.json
