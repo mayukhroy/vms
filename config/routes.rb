@@ -20,9 +20,7 @@ Library::Application.routes.draw do
       
   get '/validate/:project_name',  to: 'projects#validate', as: 'validate'
   
-  #get '/invitations',  to: 'home#show_invitations', as: 'invitations'
-
-  match 'home/show_invitations' => 'home#show_invitations'
+  get '/invitations',  to: 'home#show_invitations', as: 'invitations'
   
   get '/user/validate',  to: 'admin#validate_user'
   
