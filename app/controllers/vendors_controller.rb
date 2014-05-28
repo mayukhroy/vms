@@ -1,10 +1,17 @@
 class VendorsController < ApplicationController
   layout :false, :only =>[:new, :edit, :validate_email_exists, :show]
-
+  before_filter :signed_in_user
   #layout "false", :only =>[:new]
   #layout :false =>
   # GET /vendors
   # GET /vendors.json
+  def signed_in_user
+	if user_signed_in?
+		redirect_to :controller=>'vendor', :action=>'index'
+		else
+		redirect_to :controller=>'devise/sessions', :action=>'new'	
+	end			
+  end
   def index
     @empty_vendor = false
     if params[:change].present? && params[:change].to_i == 1
