@@ -5,7 +5,7 @@
 	Data not available
 	<br/><br/><br/>
 <% end %>
-<% @invitations.each do |invitation| %>
+
 <br/><br/>
 <input type='text' placeholder='search here . . .' id='search'>
 <br/><br/>
@@ -18,6 +18,7 @@
 	  <th>Invitee</th>
 	  <th>Sent At</th>
   <tr>
+  	<% @invitations.each do |invitation| %>
   <tr>
 	<td><%= Project.find(invitation.project_id).name %></td>
 	<td><%= Vendor.find(invitation.vendor_id).name %></td>
