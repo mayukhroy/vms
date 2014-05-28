@@ -22,14 +22,15 @@
 	<td><%= Project.find(invitation.project_id).name %></td>
 	<td><%= Vendor.find(invitation.vendor_id).name %></td>
 	<td>
-		<% Service.where(:vendor_id => invitation.vendor_id).each do |service| %>
-			<%= service.name %><br/>
-		<% end %>
-	
+		<% Project.where(:id =>invitation.project_id, :vendor_id=>invitation.vendor_id).each do |project| %>
+			<% project.services_ids.each do |service_id| %>
+				<%= Service.find(service_id).name %><br/>
+			<% end %>
+		<% end %>	
 	</td>
 	<td><%= User.find(invitation.inviter_id).name %></td>
 	<td><%= User.find(invitation.invitee_id).name %></td>
-	<td><%= invitation.invitation_sent_at %></td>
+	<td><%= invitation.invitation_sent_at.strftime("%d %B %Y , %I:%M %p") %></td>
   </tr>
 <% end %>
 </table>
