@@ -1,4 +1,14 @@
 class HomeController < ApplicationController
+	
+	  before_filter :signed_in_user
+  
+	  private
+	  def signed_in_user
+	     if !user_signed_in?
+			redirect_to :controller=>'devise/sessions', :action=>'new'	
+		end				
+	  end
+	
 	def index
 		if user_signed_in?
 			if current_user.id ==1

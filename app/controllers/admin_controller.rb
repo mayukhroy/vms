@@ -79,8 +79,11 @@ class AdminController < ApplicationController
   
   private
   def signed_in_user
-	if User.find(current_user.id).role == "USER"
+	if !user_signed_in?
+		redirect_to :controller=>'devise/sessions', :action=>'new'	
+	end	
+	if current_user.present? && User.find(current_user.id).role == "USER"
 		redirect_to :controller=>'vendor', :action=>'index'
-	end			
+	end
   end
 end

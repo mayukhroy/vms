@@ -1,7 +1,16 @@
 class ServicesController < ApplicationController
 	layout :false, :only =>[:new, :edit, :validate_service]
-  # GET /services
-  # GET /services.json
+
+  before_filter :signed_in_user
+  
+  private
+  def signed_in_user
+     if !user_signed_in?
+		redirect_to :controller=>'devise/sessions', :action=>'new'
+	end				
+  end
+
+
   def index
     @services = Service.paginate(:page => params[:page], :per_page => 15).order(params[:sort]).order('name ASC')
     @vendors = Vendor.order(params[:sort]).order('name ASC')
