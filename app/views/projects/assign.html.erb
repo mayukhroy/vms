@@ -2,7 +2,7 @@
 
 	function showServices(vendor_id) {
 		 $.get( "service/"+vendor_id+"/"+<%="#{@project.id}"%>, function( data ) {
-                    $("#"+vendor_id).append(data);
+                    $("#"+vendor_id).html(data);
                 });
 	}
 	
