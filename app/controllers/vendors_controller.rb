@@ -6,11 +6,9 @@ class VendorsController < ApplicationController
   # GET /vendors
   # GET /vendors.json
   def signed_in_user
-	if user_signed_in?
-		redirect_to :controller=>'vendor', :action=>'index'
-		else
+     if !user_signed_in?
 		redirect_to :controller=>'devise/sessions', :action=>'new'	
-	end			
+	end				
   end
   def index
     @empty_vendor = false
