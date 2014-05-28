@@ -1,4 +1,11 @@
-<span class="tag-title">Services <%= link_to image_tag("/assets/icons/add.png"), new_service_path, :data => { :colorbox => true, :colorbox_height =>'400px', :colorbox_width =>'400px'}, class: "link-btn" %></span>
+<!-- Services -->
+<span class="tag-title">Services <%= link_to image_tag("/assets/icons/add.png"), new_service_path, :data => { :colorbox => true, :colorbox_height =>'400px', :colorbox_width =>'400px'}, class: "link-btn" , :title=>"Add Service" %></span>
+<% if @empty_service %>
+	<br/><br/><br/>
+	Data not available.
+	<br/><br/>
+<% else %>
+
 <p id="notice"><%= notice %></p>
 <table>
   <tr>
@@ -25,9 +32,9 @@
     <% end  %></td>
 </tr>
   </table>
-<tr align='right'><td><%= will_paginate @services %></td></tr></br>
+<div align="right"><%= will_paginate @services %></div>
 
-
+<% end  %>
 
 
 

@@ -4,9 +4,12 @@ class AdminController < ApplicationController
   layout false, only: [:new, :show, :edit, :validate_user]
   
   def index
-    # @users = User.find_by_role("USER")
-   @users = User.where(role: 'USER').paginate(:page => params[:page], :per_page => 5)
-
+	  
+   @empty_user = false
+   @users = User.where(role: 'USER').paginate(:page => params[:page], :per_page => 15)
+    if !@users.present?
+	    @empty_user = true
+    end
     respond_to do |format|
       format.html # index.html.erb
     end

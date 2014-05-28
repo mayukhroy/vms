@@ -1,7 +1,14 @@
-<span class="tag-title">User List <%= link_to image_tag("/assets/icons/add.png"), new_admin_path, :data => { :colorbox => true, :colorbox_height => '380px' , :colorbox_width => '310px' }, class: "link-btn" %></span>
+<!-- Users -->
+<span class="tag-title">User List <%= link_to image_tag("/assets/icons/add.png"), new_admin_path, :data => { :colorbox => true, :colorbox_height => '380px' , :colorbox_width => '310px' }, class: "link-btn"  , :title=> "Create User"  %></span>
+<% if @empty_user %>
+	<br/><br/><br/>
+	Data not available.
+	<br/><br/>
+<% else %>
+
 <p class='notice'><%= notice %></p>
 <br/>
-<input type='text' placeholder='search here . . .' id='search'> 
+<input type='text' placeholder='search here . . .' id='search'>
 <br/>
 <table id='searchTable'>
   <tr align='right'><td><%= will_paginate @users %></td></tr>
@@ -22,5 +29,6 @@
   
 <% end %>
 </table>
-
+<div align="right"><%= will_paginate @users %></div>
 <br />
+<% end %>

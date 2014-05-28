@@ -1,8 +1,21 @@
 <!-- Projects -->
-<span class="tag-title">Projects <%= link_to image_tag("/assets/icons/add.png"), new_project_path, :data => { :colorbox => true, :colorbox_width => '400px', :colorbox_height => '200px' }, class: "link-btn" %></span>
-<% if @empty_project %>
+<span class="tag-title">Projects <%= link_to image_tag("/assets/icons/add.png"), new_project_path, :data => { :colorbox => true, :colorbox_width => '400px', :colorbox_height => '200px' }, class: "link-btn" , :title=> "Add Project"  %></span>
+
+<% if params[:s].present? && params[:s].to_i==0 && @empty_project %>
 	<br/><br/><br/>
-	<%= "Data not available" %>
+	<%= "No results found for inactive projects" %>
+	<br/><br/><br/>
+	<%= link_to "Show active only", "/project/status/1?s=1" %>
+	<%= link_to "Show All", "/projects"%>
+<% elsif params[:s].present? && params[:s].to_i==1 && @empty_project %>
+	<br/><br/><br/>
+	<%= "No results found for active projects" %>
+	<br/><br/><br/>
+	<%= link_to "Show inactive only", "/project/status/0?s=0" %>
+	<%= link_to "Show All", "/projects"%>
+<% elsif  @empty_project %>
+	<br/><br/><br/>
+		<%= "No results found for projects" %>
 	<br/><br/><br/>
 <% else %>
 
@@ -46,7 +59,7 @@
 		<% if !@check_vendor %>
 			<%= link_to_if project.status , "Assign Project",  assign_path(project), :title => "Asign Project" %>
 		<% else %>
-			Project already assigned
+			Project assigned
 		<% end %>
 	</td>
 	<td>
