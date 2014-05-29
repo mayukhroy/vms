@@ -1,9 +1,16 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Name:</b>
+  <b>Vendor Name:</b>
   <%= @vendor.name %>
 </p>
+
+<p>
+  <b>Services available:</b>
+  <% @services.each do |service| %>
+	<br/><%= service.name %>
+<% end %>
+  </p>
 
 <p>
   <b>Email:</b>
@@ -11,10 +18,11 @@
 </p>
 
 <p>
-  <b>Services:</b>
-  <% @services.each do |service| %>
-  <%= service.name %>
-<% end %>
-  
-  </p>
+  <b>Contact Number:</b>
+  <%= @vendor.contact_no %>
+</p>
 
+<p>
+  <b>Address:</b>
+  <%= @vendor.address %>
+</p>
