@@ -3,10 +3,10 @@
 <div id="header">
 	<h1><a href="/">VMS</a></h1>
 	<div class="clear"></div>
+	<% if user_signed_in? %>
+		<div align="right"><b>Logged in as <%= current_user.role %> - <%= current_user.name %></b></div>
+	<% end %>
 </div>
-<% if user_signed_in? %>
-	<div align="right"><b>Logged in as <%= current_user.role %> - <%= current_user.name %></b></div>
-<% end %>
 <div id="nav" class='main_menu'>
 	<ul id="menu1"> 
 		<li class="start selected">
