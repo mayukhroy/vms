@@ -1,12 +1,14 @@
 <!-- Services -->
-<span class="tag-title">Services <%= link_to image_tag("/assets/icons/add.png"), new_service_path, :data => { :colorbox => true, :colorbox_height =>'400px', :colorbox_width =>'400px'}, class: "link-btn" , :title=>"Add Service" %></span>
+
+<span class="tag-title">Services <% if Vendor.all.present? %><%= link_to image_tag("/assets/icons/add.png"), new_service_path, :data => { :colorbox => true, :colorbox_height =>'400px', :colorbox_width =>'400px'}, class: "link-btn" , :title=>"Add Service" %><% end %></span>
+
 <% if @empty_service %>
 	<br/><br/><br/>
-	Data not available.
+	Data not available. <% if !Vendor.all.present? %> Please add vendor.<% end %>
 	<br/><br/>
 <% else %>
-<br/>
-<input type='text' placeholder='search here . . .' id='search'> 
+<br/><br/><br/>
+<input type='text' placeholder='search here . . .' id='search'>
 <br/>
 <p id="notice"><%= notice %></p>
 <table id='searchTable'>
@@ -19,45 +21,43 @@
   
   <% @vendors.each do |vendor| %>
   <tr>
-    <td><%= vendor.name %></td>
-    <td>
+    <td valign="top"><%= vendor.name %></td>
+    <td valign="top">
 	<% @services.where(:vendor_id => vendor.id).each do |service| %>
-		<%= service.name %><br/>
+		<%= service.name %><br/><br/>
 	<% end %>
 	</td>
-	<td>
+	<td valign="top">
 	<% @services.where(:vendor_id => vendor.id).each do |service| %>
 		<% if Project.where(:vendor_id => vendor.id).present? %>
 			<% Project.where(:vendor_id => vendor.id).each do |project| %>
 				<% project.services_ids.each do |service_id| %>
 					<% if service_id.to_i == service.id.to_i %>
-						<%= link_to project.name, project, :data => { :colorbox => true, :colorbox_width => '300px' }, class: "link-btn" , :title => "View Project Details" %>
+						<%= link_to project.name, project, :data => { :colorbox => true, :colorbox_width => '300px' }, class: "link-btn" , :title => "View Project Details" %><br/><br/>
 					<% else  %>
-						Not assigned
-					<% end  %>
-					<br/>
+						Not assigned<br/><br/>
+					<% end  %>					
 				<% end %>
 			<% end  %>
 		<% else  %>
-			Not assigned
+			Not assigned<br/><br/>
 		<% end  %>
 	<% end  %>
 	</td>
-	<td>
+	<td valign="top">
 	<% @services.where(:vendor_id => vendor.id).each do |service| %>		
-		<% if current_user.id==Vendor.find(service.vendor_id).user_id %>	
-			<br/>
+		<% if current_user.id==Vendor.find(service.vendor_id).user_id %>
 			<% Project.where(:vendor_id => vendor.id).each do |project| %>
 				<% project.services_ids.each do |service_id| %>
 					<% if service_id.to_i != service.id.to_i %>
 						<%= link_to image_tag("/assets/icons/edit.png"), edit_service_path(service), :data => { :colorbox => true }, class: "link-btn", :data => { :colorbox => true, :colorbox_height =>'400px', :colorbox_width =>'400px'} %>
-						<%= link_to image_tag("/assets/icons/delete.png"), service, method: :delete, data: { confirm: 'Are you sure?' }, class: "link-btn" %>
+						<%= link_to image_tag("/assets/icons/delete.png"), service, method: :delete, data: { confirm: 'Are you sure?' }, class: "link-btn" %><br/>
 					<% end %>
 				<% end %>
 			<% end  %>
 			<% if !Project.where(:vendor_id => vendor.id).present? %>
 				<%= link_to image_tag("/assets/icons/edit.png"), edit_service_path(service), :data => { :colorbox => true }, class: "link-btn", :data => { :colorbox => true, :colorbox_height =>'400px', :colorbox_width =>'400px'} %>
-				<%= link_to image_tag("/assets/icons/delete.png"), service, method: :delete, data: { confirm: 'Are you sure?' }, class: "link-btn" %>
+				<%= link_to image_tag("/assets/icons/delete.png"), service, method: :delete, data: { confirm: 'Are you sure?' }, class: "link-btn" %><br/>
 			<% end %>
 		<% end %>	
 	<% end  %>
