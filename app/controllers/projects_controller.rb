@@ -1,6 +1,5 @@
 class ProjectsController < ApplicationController
-  # GET /projects
-  # GET /projects.json
+
   layout false, only: [:get_service_list, :new, :edit, :show, :validate]
 
   before_filter :signed_in_user
