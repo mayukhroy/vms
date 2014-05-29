@@ -1,5 +1,5 @@
 class VendorsController < ApplicationController
-  layout :false, :only =>[:new, :edit, :validate_email_exists, :show]
+  layout :false, :only =>[:new, :edit, :validate_vendor, :show]
   
   before_filter :signed_in_user
   
@@ -124,9 +124,6 @@ class VendorsController < ApplicationController
     end
   end
 
-  def validate_email_exists
-	@is_present_email = Vendor.find_by_email(params[:email]).present?
-  end
 
   def change_status
     @vendor = Vendor.find(params[:id])
@@ -140,6 +137,17 @@ class VendorsController < ApplicationController
     end
   end
 
+  def validate_vendor
+	if params[:vendor_name].present?
+		@vendor_name_exist = Vendor.find_by_name(params[:vendor_name]).present?
+	end
+	
+	if params[:vendor_email].present?	  
+		@vendor_email_exist = Vendor.find_by_email(params[:vendor_email]).present?
+	end
+  end  
+  
+  
   private
   def signed_in_user
      if !user_signed_in?

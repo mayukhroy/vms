@@ -3,8 +3,6 @@ Library::Application.routes.draw do
   resources :services
 
   resources :vendors
-  
-  post '/validate_email_exists',  to: 'vendors#validate_email_exists'
 
   resources :projects 
   
@@ -29,6 +27,8 @@ Library::Application.routes.draw do
   get '/vendor/change/status/:id/:change_to',  to: 'vendors#change_status'
   
   get '/service/validate',  to: 'services#validate_service'
+  
+  get '/vendor/validate',  to: 'vendors#validate_vendor'
   
   devise_for :users
   
