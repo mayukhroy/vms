@@ -37,6 +37,8 @@
     <th>Name</th>
     <th>Creator</th>
     <th>Email</th>
+    <th>Contact No.</th>
+    <th>Address</th>
     <th>Status</th>
     <th>Action</th>
   </tr>
@@ -46,6 +48,8 @@
     <td><%= vendor.name %></td>
     <td><%= getVendorCreatorName(vendor.user_id) %></td>
     <td><%= vendor.email %></td>
+    <td><%= vendor.contact_no %></td>
+    <td><%= vendor.address %></td>
     <td>
 	<% if vendor.status %>
 		<%= link_to "Active", "/vendor/change/status/#{vendor.id}/false", data: { confirm: "Click ok, to make #{vendor.name} inactive ?" } %>

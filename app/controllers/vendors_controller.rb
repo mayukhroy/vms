@@ -94,12 +94,13 @@ class VendorsController < ApplicationController
     respond_to do |format|
       if @vendor.update_attributes(params[:vendor])
 	#Creating services for this vendor
-	params[:services].values.each do |service|
-		unless service.blank?
-			@service = Service.new(:vendor_id => @vendor.id, :name => service)
-			@service.save
-		end
-	end
+	
+	#params[:services].values.each do |service|
+	#	unless service.blank?
+	#		@service = Service.new(:vendor_id => @vendor.id, :name => service)
+	#		@service.save
+	#	end
+	#end
         #format.html { redirect_to @vendor, notice: 'Vendor was successfully updated.' }
 	flash[:notice]= 'Vendor was successfully updated.'
 	format.html { redirect_to action: 'index'}
